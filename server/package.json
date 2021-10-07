@@ -2,6 +2,7 @@
   "dependencies": {
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "jest": "^27.2.4"
+    "jest": "^27.2.4",
+    "typeorm": "^0.2.38"
   }
 }
