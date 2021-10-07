@@ -5,5 +5,7 @@
   },
   "editor.codeActionsOnSave": {
     "source.fixAll": true
- }
+  }
 }
+
+// https://jeremiechazelle.dev/utiliser-eslint-et-prettier-sous-visual-studio-code-webstorm-phpstorm-pour-un-code-de-qualite/
