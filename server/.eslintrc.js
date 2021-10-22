@@ -17,5 +17,8 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
+    rules: {
+      'new-cap': 0,
+    },
   },
 };
