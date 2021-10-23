@@ -17,6 +17,7 @@
     "sass": "^1.43.3"
   },
   "devDependencies": {
+    "@types/quill": "^2.0.9",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.3.1",
