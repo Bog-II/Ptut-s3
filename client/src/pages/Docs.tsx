@@ -4,7 +4,7 @@ import Editor from '../components/Editor'
 const Docs = () => {
 	return (
 		<div>
-			<h1>Docs</h1>
+			<h1>Titre du document</h1>
 			<Editor></Editor>
 		</div>
 	)
