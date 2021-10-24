@@ -2,12 +2,9 @@ import React, { useCallback, useState } from 'react'
 import Quill from 'quill'
 import "quill/dist/quill.snow.css"
 import "./Editor.css"
+import { io } from 'socket.io-client'
 
-interface Props {
-	text: string,
-}
-
-const Editor = (props: Props) => {
+const Editor = () => {
 
 	const wrapperRef = useCallback(wrapper => {
 		const toolbarOptions = [
@@ -31,7 +28,7 @@ const Editor = (props: Props) => {
 			modules: {
 				toolbar: toolbarOptions,
 			},
-		}).setText(props.text)
+		})
 	}, [])
 
 	return (
