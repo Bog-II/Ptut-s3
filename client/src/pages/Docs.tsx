@@ -1,7 +1,7 @@
 import React from 'react'
 import Editor from '../components/Editor'
+import Logo from '../components/Logo'
 import "./Docs.css"
-import Logo from "../../resources/logo.png"
 
 const Docs = () => {
 
@@ -13,7 +13,7 @@ const Docs = () => {
 	return (
 		<div>
 			<div className="editor-header">
-				<img className="logo" src={Logo} />
+				<Logo />
 				<h1 className="document-title">{document.title}</h1>
 			</div>
 			<Editor text={document.text} ></Editor>
