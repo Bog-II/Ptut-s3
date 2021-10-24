@@ -14,7 +14,7 @@ export default function App() {
   return (
     <Router>
       <div>
-        {/* <nav>
+        <nav>
           <ul>
             <li>
               <Link to="/">Home</Link>
@@ -29,7 +29,7 @@ export default function App() {
               <Link to="/docs">Editer Document</Link>
             </li>
           </ul>
-        </nav> */}
+        </nav>
 
         <Switch>
           <Route exact path="/">
