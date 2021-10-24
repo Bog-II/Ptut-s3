@@ -1,0 +1,20 @@
+.container{
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content:center;	
+}
+
+.ql-toolbar{
+	width:100%;
+}
+
+.container .ql-container.ql-snow{
+	margin-top:2em;
+	padding:1.5cm;
+	width:8.268in;
+	height:11.693in;
+	background-color: white;
+	border: 0px solid black;
+	box-shadow: 0 0 5px 0 black;
+}
