@@ -1,16 +1,26 @@
-import express from 'express';
-import socketio from 'socket.io'
-
-const io = socketio(3001,{
-  cors:{
+const express = require('express');
+const io = require('socket.io')(3001, {
+  cors: {
     origin: 'http://localhost:3000',
-    methods: ['GET','POST']
-  }
-})
+    methods: ['GET', 'POST'],
+  },
+});
 
-io.on("connection", socket => {
+// when we receive a connection from a quill instance
+io.on('connection', (socket) => {
+  socket.on('get-document', (docId) => {
+    const data = '';
+    socket.join(docId);
+    socket.emit('load-document', data);
 
-})
+    // when we receive the changes from a
+    socket.on('send-changes', (delta) => {
+      socket.broadcast.to(docId).emit('receive-changes', delta);
+    });
+  });
+
+  console.log('connected');
+});
 
 const app = express();
 app.listen(5000, () => {
