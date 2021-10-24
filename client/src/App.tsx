@@ -14,23 +14,6 @@ export default function App() {
   return (
     <Router>
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/authentification">Authentification</Link>
-            </li>
-            <li>
-              <Link to="/registration">Registration</Link>
-            </li>
-            <li>
-              <Link to="/docs">Editer Document</Link>
-            </li>
-          </ul>
-        </nav>
-
         <Switch>
           <Route exact path="/">
             <Home />
