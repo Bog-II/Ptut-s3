@@ -9,6 +9,8 @@ interface Param {
   id: string;
 }
 
+const saveInterval = 2000;
+
 const Editor = () => {
   const { id: docId } = useParams<Param>();
   const [socket, setSocket] = useState<Socket>();
@@ -62,6 +64,18 @@ const Editor = () => {
 
     return () => {
       quill?.off('text-change', handler);
+    };
+  }, [quill, socket]);
+
+  useEffect(() => {
+    if (socket == null || quill == null) return;
+
+    const interval = setInterval(() => {
+      socket.emit('save-document', quill.getContents());
+    }, saveInterval);
+
+    return () => {
+      clearInterval(interval);
     };
   }, [quill, socket]);
 
