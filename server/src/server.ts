@@ -1,11 +1,12 @@
 const express = require('express');
 const io = require('socket.io')(3001, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: ['http://localhost:80', 'http://localhost'],
     methods: ['GET', 'POST'],
   },
 });
 const mongoose = require('mongoose');
+const path = require('path');
 import MongoDocument from './schemas/MongoDocument';
 
 const uri = 'mongodb+srv://dbRayan:1402@cluster0.utyhq.mongodb.net/test';
@@ -44,6 +45,18 @@ io.on('connection', (socket) => {
 });
 
 const app = express();
-app.listen(5000, () => {
-  console.log('Server running on port 5000');
+
+app.use(
+  '/assets',
+  express.static(path.join(__dirname, '../../client/dist/assets'))
+);
+
+app.get('*', (req, res) => {
+  res.sendFile('index.html', {
+    root: path.join(__dirname, '../../client/dist'),
+  });
+});
+
+app.listen(80, () => {
+  console.log('Server running on port 80');
 });
