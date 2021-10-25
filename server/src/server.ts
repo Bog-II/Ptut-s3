@@ -6,7 +6,7 @@ const io = require('socket.io')(3001, {
   },
 });
 const mongoose = require('mongoose');
-import MongoDocument, { findOrCreate } from './schemas/MongoDocument';
+import MongoDocument from './schemas/MongoDocument';
 
 const uri = 'mongodb+srv://dbRayan:1402@cluster0.utyhq.mongodb.net/test';
 mongoose.connect(uri, {
@@ -17,6 +17,13 @@ const connection = mongoose.connection;
 connection.once('open', () => {
   console.log('MongoDB database connection established successfully');
 });
+
+export const findOrCreate = async (id) => {
+  if (id == null) return;
+  const document = await MongoDocument.findById(id);
+  if (document) return document;
+  return MongoDocument.create({ _id: id, data: '' });
+};
 
 // when we receive a connection from a quill instance
 io.on('connection', (socket) => {
