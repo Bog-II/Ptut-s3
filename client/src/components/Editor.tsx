@@ -18,7 +18,7 @@ const Editor = () => {
 
   // on component mount, we initialize the socket
   useEffect(() => {
-    setSocket(io('http://192.168.1.75:3001'));
+    setSocket(io('http://localhost:3001'));
 
     return () => {
       socket?.disconnect();
