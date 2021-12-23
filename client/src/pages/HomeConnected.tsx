@@ -1,5 +1,6 @@
 import React from 'react'
 import SearchBar from '../components/SearchBar'
+import DocumentList from "../components/DocumentList";
 
 const HomeConnected = () => {
     return (
@@ -9,7 +10,7 @@ const HomeConnected = () => {
             </div>
             <div>
                 <SearchBar />
-
+                <DocumentList/>
             </div>
         </div>
     )
