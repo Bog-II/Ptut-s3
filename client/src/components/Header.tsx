@@ -1,5 +1,6 @@
 import Logo from './Logo';
 import ProfilePictures from './ProfilePictures';
+import './Header.css';
 
 const Header = () => {
   return (
@@ -8,7 +9,10 @@ const Header = () => {
         <Logo />
         <h1 className="document-title">{document.title}</h1>
       </div>
-      <ProfilePictures />
+      <div className="right-header">
+        <ProfilePictures />
+        <button>Partager</button>
+      </div>
     </div>
   );
 };
