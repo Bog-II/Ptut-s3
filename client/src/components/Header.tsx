@@ -1,5 +1,5 @@
-import Logo from "./Logo";
-import ProfilePicture from "./ProfilePicture";
+import Logo from './Logo';
+import ProfilePictures from './ProfilePictures';
 
 const Header = () => {
   return (
@@ -8,7 +8,7 @@ const Header = () => {
         <Logo />
         <h1 className="document-title">{document.title}</h1>
       </div>
-      <ProfilePicture />
+      <ProfilePictures />
     </div>
   );
 };

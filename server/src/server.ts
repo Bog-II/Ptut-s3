@@ -1,7 +1,11 @@
 const express = require('express');
 const io = require('socket.io')(3001, {
   cors: {
-    origin: ['http://localhost:80', 'http://localhost'],
+    origin: [
+      'http://localhost:80',
+      'http://localhost',
+      'http://localhost:3000',
+    ],
     methods: ['GET', 'POST'],
   },
 });
