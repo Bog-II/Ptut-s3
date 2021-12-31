@@ -1,16 +1,22 @@
-.editor-header{
-	display:flex;
-	align-items:center;
-	flex-direction:row;
-	margin-left:2em;
+.editor-header {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-left: 2em;
+  justify-content: space-around;
 }
 
-.document-title{
-	margin-left:1em;
+.document-title {
+  margin-left: 1em;
 }
 
-@media print{
-	body{
-		background:none;
-	}
+@media print {
+  body {
+    background: none;
+  }
+}
+
+.left-header {
+  display: flex;
+  align-items: center;
 }
