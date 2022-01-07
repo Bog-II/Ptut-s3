@@ -1,40 +1,40 @@
 {
-   "name": "server",
-   "version": "1.0.0",
-   "main": "dist/server.js",
-   "scripts": {
-      "build": "tsc",
-      "dev": "ts-node-dev --poll src/server.ts",
-      "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
-      "start": "ts-node src/index.ts"
-   },
-   "keywords": [],
-   "author": "",
-   "license": "ISC",
-   "description": "",
-   "dependencies": {
-      "dotenv": "^10.0.0",
-      "express": "^4.17.1",
-      "jest": "^27.2.4",
-      "mongoose": "^6.0.12",
-      "nodemon": "^2.0.13",
-      "pg": "^8.4.0",
-      "reflect-metadata": "^0.1.10",
-      "socket.io": "^4.3.1",
-      "typeorm": "0.2.38"
-   },
-   "devDependencies": {
-      "@types/express": "^4.17.13",
-      "@types/node": "^8.0.29",
-      "@typescript-eslint/eslint-plugin": "^4.33.0",
-      "@typescript-eslint/parser": "^4.33.0",
-      "eslint": "^7.32.0",
-      "eslint-config-google": "^0.14.0",
-      "eslint-config-prettier": "^8.3.0",
-      "eslint-plugin-prettier": "^4.0.0",
-      "prettier": "^2.4.1",
-      "ts-node": "3.3.0",
-      "ts-node-dev": "^1.1.8",
-      "typescript": "3.3.3333"
-   }
+  "name": "server",
+  "version": "1.0.0",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node-dev --poll src/server.ts",
+    "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
+    "start": "ts-node src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jest": "^27.2.4",
+    "mongoose": "^6.0.12",
+    "nodemon": "^2.0.13",
+    "pg": "^8.4.0",
+    "reflect-metadata": "^0.1.10",
+    "socket.io": "^4.3.1",
+    "typeorm": "0.2.38"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^8.0.29",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
+    "eslint": "^7.32.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.4.1",
+    "ts-node": "3.3.0",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "3.3.3333"
+  },
+  "description": ""
 }
