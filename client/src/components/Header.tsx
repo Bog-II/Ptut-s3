@@ -1,6 +1,7 @@
 import Logo from './Logo';
 import ProfilePictures from './ProfilePictures';
 import './Header.css';
+import ShareButton from './ShareButton';
 
 const Header = () => {
   return (
@@ -11,7 +12,7 @@ const Header = () => {
       </div>
       <div className="right-header">
         <ProfilePictures />
-        <button>Partager</button>
+        <ShareButton />
       </div>
     </div>
   );
