@@ -16,12 +16,13 @@
       "dotenv": "^10.0.0",
       "express": "^4.17.1",
       "jest": "^27.2.4",
+      "jsonwebtoken": "^8.5.1",
       "mongoose": "^6.0.12",
+      "multer": "^1.4.4",
       "nodemon": "^2.0.13",
       "pg": "^8.4.0",
       "reflect-metadata": "^0.1.10",
-      "socket.io": "^4.3.1",
-      "typeorm": "0.2.38"
+      "socket.io": "^4.3.1"
    },
    "devDependencies": {
       "@types/express": "^4.17.13",

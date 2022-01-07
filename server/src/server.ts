@@ -1,27 +1,25 @@
+require('dotenv').config();
+
+const path = require('path');
 const express = require('express');
-const io = require('socket.io')(3001, {
+
+// Socket.io creation and connection
+const io = require('socket.io')(process.env.SOCKET_PORT, {
   cors: {
     origin: [
-      'http://localhost:80',
+      `http://localhost:${process.env.SERVER_PORT}`,
       'http://localhost',
       'http://localhost:3000',
     ],
     methods: ['GET', 'POST'],
   },
 });
-const mongoose = require('mongoose');
-const path = require('path');
-import MongoDocument from './schemas/MongoDocument';
 
-const uri = 'mongodb+srv://dbRayan:1402@cluster0.utyhq.mongodb.net/test';
-mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-const connection = mongoose.connection;
-connection.once('open', () => {
-  console.log('MongoDB database connection established successfully');
-});
+import { doc } from 'prettier';
+import { connectMangoDB } from './config/mangodb.config';
+connectMangoDB();
+
+import MongoDocument from './schemas/MongoDocument';
 
 export const findOrCreate = async (id) => {
   if (id == null) return;
@@ -30,20 +28,27 @@ export const findOrCreate = async (id) => {
   return MongoDocument.create({ _id: id, data: '' });
 };
 
+const rooms = io.of('/').adapter.rooms;
+const sids = io.of('/').adapter.sids;
+
 // when we receive a connection from a quill instance
 io.on('connection', (socket) => {
-  socket.on('get-document', async (docId) => {
+  socket.on('get-document', async (docId: string, data: string) => {
     const document = await findOrCreate(docId);
     socket.join(docId);
     socket.emit('load-document', document.data);
 
-    // when we receive the changes from a
+    // when we receive the changes from a document
     socket.on('send-changes', (delta) => {
       socket.broadcast.to(docId).emit('receive-changes', delta);
     });
 
     socket.on('save-document', async (data) => {
       await MongoDocument.findByIdAndUpdate(docId, { data });
+    });
+
+    socket.on('disconnecting', () => {
+      console.log(docId, data);
     });
   });
 });
@@ -61,6 +66,6 @@ app.get('*', (req, res) => {
   });
 });
 
-app.listen(80, () => {
-  console.log('Server running on port 80');
+app.listen(process.env.SERVER_PORT, () => {
+  console.log(`Server running on port ${process.env.SERVER_PORT}`);
 });
