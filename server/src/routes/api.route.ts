@@ -13,6 +13,6 @@ apiRouter.use(express.json());
 // Sub Routers
 apiRouter.use('/users', usersRouter);
 apiRouter.use('/documents', documentsRouter);
-apiRouter.use('/', authRouter);
+apiRouter.use('/auth', authRouter);
 
 export { apiRouter };

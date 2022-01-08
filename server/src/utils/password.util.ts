@@ -14,3 +14,11 @@ export const getHashedPassword = async (password: string) => {
   return hashedPassword;
 };
 
+export const comparePasswords = async (
+  unhashedPassword: string,
+  hashedPassword: string
+) => {
+  const unhashedPepperPassword = pepperedPassword(unhashedPassword);
+  const res = await bcrypt.compare(unhashedPepperPassword, hashedPassword);
+  return res;
+};
