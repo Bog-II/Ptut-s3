@@ -3,7 +3,7 @@ import {
   createDocumentInDB,
   getAllDocumentsFromDB,
 } from '../models/document.model';
-import { isIdValid } from '../verificators/user.verificators';
+import { isIdExisting } from '../verificators/user.verificators';
 
 export const getAllDocuments = (req: Request, res: Response) => {
   getAllDocumentsFromDB((err, documents) => {
@@ -15,10 +15,11 @@ export const getAllDocuments = (req: Request, res: Response) => {
   });
 };
 
-export const createDocument = (req: Request, res: Response) => {
+export const createDocument = async (req: Request, res: Response) => {
   const { userId, documentName } = req.body;
 
-  if (!isIdValid(userId)) {
+  const isUserIdValid = await isIdExisting(userId);
+  if (!isUserIdValid) {
     return res.status(400).send('Invalid userId');
   }
 
@@ -33,4 +34,3 @@ export const createDocument = (req: Request, res: Response) => {
     }
   });
 };
-

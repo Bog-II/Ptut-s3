@@ -1,21 +1,22 @@
+import User from '../schemas/User';
+
 interface User {
   userName: string;
   password: string;
   email: string;
 }
 
-export const isUserValid = (user: User) => {
+export const isUserValid = async (user: User) => {
   const { userName, password, email } = user;
+  const emailExist = await isEmailExisting(email);
+  const userNameExist = await isUsernameExisting(userName);
   return (
-    isUserNameValid(userName) &&
+    !userNameExist &&
+    !emailExist &&
     isPasswordValid(password) &&
-    isEmailValid(password)
+    isEmailValid(email)
   );
 };
-
-export const isIdValid = (user: User) => {
-  return true;
-}
 
 export const isPasswordValid = (password: string) => {
   // To change
@@ -28,6 +29,20 @@ export const isUserNameValid = (useName: string) => {
 };
 
 export const isEmailValid = (email: string) => {
-  // To change
-  return true;
+  return email.includes('@') && email.includes('.');
+};
+
+export const isIdExisting = async (userId: number) => {
+  const user = await User.findOne({ _id: userId });
+  return user !== null;
+};
+
+export const isEmailExisting = async (email: string) => {
+  const user = await User.findOne({ email: email });
+  return user !== null;
+};
+
+export const isUsernameExisting = async (userName: string) => {
+  const user = await User.findOne({ userName: userName });
+  return user !== null;
 };

@@ -36,12 +36,14 @@ export const getAllUsers = (req: Request, res: Response) => {
 //   });
 // }
 
-export const createUser = (req: Request, res: Response) => {
+export const createUser = async (req: Request, res: Response) => {
   const { userName, password, email } = req.body;
 
   const userToVerify = { userName: userName, password: password, email: email };
-  if (!isUserValid(userToVerify)) {
-    return res.status(400).send('Invalid fields');
+
+  const arePropertiesValid = await isUserValid(userToVerify);
+  if (!arePropertiesValid) {
+    return res.status(400).send('Email or Username already exists');
   }
 
   createUserDB(userName, password, email, (err, user) => {

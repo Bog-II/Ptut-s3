@@ -1,5 +1,6 @@
 import User from '../schemas/User';
 import { v4 as uuidv4 } from 'uuid';
+import { getHashedPassword } from '../utils/password.util';
 
 export const getAllUsersFromDB = (
   callback: (err: Error | null, res: any) => void
@@ -13,19 +14,17 @@ export const getAllUsersFromDB = (
   });
 };
 
-export const createUserDB = (
+export const createUserDB = async (
   userName: string,
   password: string,
   email: string,
   callback: (err: Error | null, res: any) => void
 ) => {
-
-  
-
+  const hashedPassword = await getHashedPassword(password);
   const user = {
     _id: uuidv4(),
     userName: userName,
-    password: password,
+    password: hashedPassword,
     email: email,
   };
 

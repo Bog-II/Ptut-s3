@@ -5,6 +5,8 @@ declare global {
       SOCKET_PORT?: number;
       SERVER_PORT: number;
       JWT_SECRET_TOKEN: string;
+      ROUNDS_SALT_BCRYPT: string;
+      PEPPER_BCRYPT: string;
     }
   }
 }
