@@ -19,8 +19,8 @@ const Document = new Schema({
     ],
     required: true,
   },
-  creationDate: { type: Date, required: true },
-  lastModificationDate: { type: Date, required: true },
+  creationDate: { type: Date, required: true, default: Date.now },
+  lastModificationDate: { type: Date, required: true, default: Date.now },
 });
 
 export default model('Document', Document);

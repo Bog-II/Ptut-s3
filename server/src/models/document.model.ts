@@ -23,8 +23,8 @@ export const createDocumentInDB = (
     data: {},
     documentName: documentName,
     users: [{ userId: userId, role: 1 }],
-    creationDate: new Date(),
-    lastModificationDate: new Date(),
+    creationDate: Date.now(),
+    lastModificationDate: Date.now(),
   };
 
   Document.create(document, (errQuery, document) => {

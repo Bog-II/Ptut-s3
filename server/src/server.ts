@@ -53,7 +53,10 @@ io.on('connection', (socket) => {
     });
 
     socket.on('save-document', async (data) => {
-      await Document.findByIdAndUpdate(docId, { data });
+      await Document.findByIdAndUpdate(docId, {
+        data: data,
+        lastModificationDate: Date.now(),
+      });
     });
 
     socket.on('disconnecting', () => {
