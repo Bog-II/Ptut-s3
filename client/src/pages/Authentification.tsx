@@ -4,10 +4,6 @@ import { Link } from 'react-router-dom';
 import './Authentification.css';
 
 const Authentification = () => {
-  var formField = {
-    justifyContent: 'center',
-    fontSize: 25,
-  };
   return (
     <div className="autentification">
       <header>
@@ -19,18 +15,20 @@ const Authentification = () => {
           </h3>
         </div>
       </header>
+
       <h1>Authentification</h1>
       <div className="fieldBox">
-        <form style={formField} className="formBox">
-          <label>
-            Pseudo :
+        <form action='/login'>
+          <div>
+            <label> Username ou Email:</label>
             <input type="text" name="pseudo" required />
-          </label>
-          <br />
-          <label>
-            Mot-de-passe :
+          </div>
+
+          <div>
+            <label> Mot-de-passe:</label>
             <input type="password" name="password" required />
-          </label>
+          </div>
+
           <br />
           <input type="submit" value="Envoyer" name="authentificate" />
         </form>

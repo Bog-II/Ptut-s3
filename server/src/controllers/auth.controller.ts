@@ -2,6 +2,9 @@ import { Request, Response } from 'express';
 import User from '../schemas/User';
 import { comparePasswords, getHashedPassword } from '../utils/password.util';
 
+import jwt from 'jsonwebtoken';
+import { resolveSrv } from 'dns';
+
 export const loginUser = async (req: Request, res: Response) => {
   const { emailOrUsername, password } = req.body;
 
@@ -25,5 +28,10 @@ export const loginUser = async (req: Request, res: Response) => {
     });
   }
 
-  res.send('Logged In');
+  // Create jwt token
+  const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET_TOKEN);
+  res.header('access_token', token);
+
+  // Send jwt token
+  res.status(200).send({ token: token });
 };
