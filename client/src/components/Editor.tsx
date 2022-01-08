@@ -20,8 +20,14 @@ const Editor = () => {
   useEffect(() => {
     setSocket(io('http://localhost:3001'));
 
+    // on component unmount, we disconnect the socket
     return () => {
-      socket?.disconnect();
+      console.log(socket);
+      console.log(docId);
+
+      if (socket) {
+        socket.disconnect();
+      }
     };
   }, []);
 
@@ -34,12 +40,13 @@ const Editor = () => {
       quill.enable();
     });
 
-    socket.emit('get-document', docId);
+    socket.emit('get-document', docId, "userId");
   }, [socket, quill, docId]);
 
   // when server is broadcasting changes we apply them
   useEffect(() => {
     if (quill == null || socket == null) return;
+
     const handler: TextChangeHandler = (delta) => {
       console.log('delta : ' + delta);
       quill.updateContents(delta);

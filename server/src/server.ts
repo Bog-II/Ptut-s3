@@ -1,39 +1,47 @@
+require('dotenv').config();
+
+const path = require('path');
 const express = require('express');
-const io = require('socket.io')(3001, {
+
+// Socket.io creation and connection
+const io = require('socket.io')(process.env.SOCKET_PORT, {
   cors: {
-    origin: ['http://localhost:80', 'http://localhost'],
+    origin: [
+      `http://localhost:${process.env.SERVER_PORT}`,
+      'http://localhost',
+      'http://localhost:3000',
+    ],
     methods: ['GET', 'POST'],
   },
 });
-const mongoose = require('mongoose');
-const path = require('path');
-import MongoDocument from './schemas/MongoDocument';
 
-const uri = 'mongodb+srv://dbRayan:1402@cluster0.utyhq.mongodb.net/test';
-mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-const connection = mongoose.connection;
-connection.once('open', () => {
-  console.log('MongoDB database connection established successfully');
-});
+import { connectMangoDB } from './config/mangodb.config';
+
+connectMangoDB();
+
+import MongoDocument from './schemas/MongoDocument';
 
 export const findOrCreate = async (id) => {
   if (id == null) return;
   const document = await MongoDocument.findById(id);
   if (document) return document;
-  return MongoDocument.create({ _id: id, data: '' });
+  return MongoDocument.create({ _id: id, data: {} });
 };
+
+const rooms = io.of('/').adapter.rooms;
+const sids = io.of('/').adapter.sids;
 
 // when we receive a connection from a quill instance
 io.on('connection', (socket) => {
-  socket.on('get-document', async (docId) => {
+  socket.on('get-document', async (docId: string, userId: string) => {
     const document = await findOrCreate(docId);
     socket.join(docId);
     socket.emit('load-document', document.data);
 
-    // when we receive the changes from a
+    console.log(`${userId} connected to ${docId}`);
+    console.log(`${rooms.get(docId).size} persons are connected on ${docId}`);
+
+    // when we receive the changes from a document
     socket.on('send-changes', (delta) => {
       socket.broadcast.to(docId).emit('receive-changes', delta);
     });
@@ -41,22 +49,39 @@ io.on('connection', (socket) => {
     socket.on('save-document', async (data) => {
       await MongoDocument.findByIdAndUpdate(docId, { data });
     });
+
+    socket.on('disconnecting', () => {
+      console.log(docId, userId);
+    });
+
+    socket.on('disconnect', () => {
+      let personInTheRoom = 0;
+      if (rooms.has(rooms.get(docId))) {
+        personInTheRoom = rooms.get(docId).size;
+      }
+
+      console.log(`${personInTheRoom} persons are connected on ${docId}`);
+    });
   });
 });
+
+import { apiRouter } from './routes/api.route';
 
 const app = express();
+app.use('/api', apiRouter);
 
-app.use(
-  '/assets',
-  express.static(path.join(__dirname, '../../client/dist/assets'))
-);
+// app.use(
+//   '/assets',
+//   express.static(path.join(__dirname, '../../client/dist/assets'))
+// );
 
-app.get('*', (req, res) => {
-  res.sendFile('index.html', {
-    root: path.join(__dirname, '../../client/dist'),
-  });
-});
+// app.get('*', (req, res) => {
+//   res.sendFile('index.html', {
+//     root: path.join(__dirname, '../../client/dist'),
+//   });
+// });
 
-app.listen(80, () => {
-  console.log('Server running on port 80');
+app.listen(process.env.SERVER_PORT, () => {
+  const PORT = process.env.SERVER_PORT;
+  console.log(`The server is listening on http://localhost:${PORT}`);
 });

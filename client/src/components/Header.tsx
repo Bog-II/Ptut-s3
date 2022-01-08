@@ -1,5 +1,7 @@
-import Logo from "./Logo";
-import ProfilePicture from "./ProfilePicture";
+import Logo from './Logo';
+import ProfilePictures from './ProfilePictures';
+import './Header.css';
+import ShareButton from './ShareButton';
 
 const Header = () => {
   return (
@@ -8,7 +10,10 @@ const Header = () => {
         <Logo />
         <h1 className="document-title">{document.title}</h1>
       </div>
-      <ProfilePicture />
+      <div className="right-header">
+        <ProfilePictures />
+        <ShareButton />
+      </div>
     </div>
   );
 };

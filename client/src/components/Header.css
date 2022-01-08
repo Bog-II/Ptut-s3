@@ -1,0 +1,13 @@
+.left-header {
+  display: flex;
+  align-items: center;
+}
+
+.right-header {
+  display: flex;
+  column-gap: 30px;
+}
+
+.document-title {
+  margin-left: 1em;
+}
