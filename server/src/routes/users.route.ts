@@ -1,4 +1,16 @@
 import express from 'express';
-const userRouter = express.Router();
+import {
+  createUser,
+  getAllUsers,
+  updateUser,
+} from '../controllers/users.controller';
+const usersRouter = express.Router();
 
-export { userRouter };
+usersRouter.get('/', getAllUsers);
+usersRouter.post('/', createUser);
+
+usersRouter.put('/:id', updateUser);
+
+usersRouter.get('/', (req, res) => {});
+
+export { usersRouter };

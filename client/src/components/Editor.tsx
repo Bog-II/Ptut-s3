@@ -40,7 +40,7 @@ const Editor = () => {
       quill.enable();
     });
 
-    socket.emit('get-document', docId, "testData");
+    socket.emit('get-document', docId, "userId");
   }, [socket, quill, docId]);
 
   // when server is broadcasting changes we apply them
