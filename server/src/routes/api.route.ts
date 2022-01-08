@@ -1,4 +1,5 @@
 import express from 'express';
+import { authRouter } from './auth.route';
 import { documentsRouter } from './document.route';
 import { usersRouter } from './users.route';
 
@@ -12,5 +13,6 @@ apiRouter.use(express.json());
 // Sub Routers
 apiRouter.use('/users', usersRouter);
 apiRouter.use('/documents', documentsRouter);
+apiRouter.use('/', authRouter);
 
 export { apiRouter };
