@@ -23,4 +23,4 @@ const Document = new Schema({
   lastModificationDate: { type: Date, required: true },
 });
 
-export default model('MongoDocument', Document);
+export default model('Document', Document);

@@ -22,7 +22,7 @@ const Registration = () => {
       <div className="registration">
         <h1>Registration</h1>
         <div className="fieldBox">
-          <form style={formField} className="formBox	">
+          <form style={formField} className="formBox	axtion">
             <label>
               Nom :
               <input type="text" name="name" required />

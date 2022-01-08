@@ -4,6 +4,7 @@ declare global {
       MANGO_URI: string;
       SOCKET_PORT?: number;
       SERVER_PORT: number;
+      JWT_SECRET_TOKEN: string;
     }
   }
 }

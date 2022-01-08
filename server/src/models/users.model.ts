@@ -24,7 +24,6 @@ export const createUserDB = (
     userName: userName,
     password: password,
     email: email,
-    documents: [],
   };
 
   User.create(user, (errQuery, user) => {
@@ -52,13 +51,26 @@ export const getUserById = (
 export const updateUserById = (
   userId: string,
   userProperties: Object,
-  callback: (err: Error | null, res: any) => void
+  callback: (err: Error | null) => void
 ) => {
-  User.findByIdAndUpdate(userId, userProperties, (errQuery, user) => {
+  User.findByIdAndUpdate(userId, userProperties, (errQuery) => {
     if (errQuery) {
-      callback(errQuery, null);
+      callback(errQuery);
     } else {
-      callback(null, user);
+      callback(null);
+    }
+  });
+};
+
+export const deleteUserById = (
+  userId: string,
+  callback: (err: Error | null) => void
+) => {
+  User.findByIdAndRemove(userId, (err, user) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null);
     }
   });
 };

@@ -16,16 +16,22 @@ const io = require('socket.io')(process.env.SOCKET_PORT, {
 });
 
 import { connectMangoDB } from './config/mangodb.config';
-
 connectMangoDB();
 
-import MongoDocument from './schemas/MongoDocument';
+import Document from './schemas/Document';
 
 export const findOrCreate = async (id) => {
   if (id == null) return;
-  const document = await MongoDocument.findById(id);
+  const document = await Document.findById(id);
   if (document) return document;
-  return MongoDocument.create({ _id: id, data: {} });
+  return Document.create({
+    _id: id,
+    data: {},
+    documentName: 'Document Name',
+    users: [],
+    creationDate: new Date(),
+    lastModificationDate: new Date(),
+  });
 };
 
 const rooms = io.of('/').adapter.rooms;
@@ -47,7 +53,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('save-document', async (data) => {
-      await MongoDocument.findByIdAndUpdate(docId, { data });
+      await Document.findByIdAndUpdate(docId, { data });
     });
 
     socket.on('disconnecting', () => {

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 
 import {
   createUserDB,
+  deleteUserById,
   getAllUsersFromDB,
   getUserById,
   updateUserById,
@@ -74,11 +75,23 @@ export const updateUser = (req: Request, res: Response) => {
     email: email,
   };
 
-  updateUserById(userId, userProperties, (err, user) => {
+  updateUserById(userId, userProperties, (err) => {
     if (err) {
       res.status(500).send(err);
     } else {
-      res.status(200).send(user);
+      res.status(200).send('User successfully updated');
+    }
+  });
+};
+
+export const deleteUser = (req: Request, res: Response) => {
+  const userId = req.params.id;
+
+  deleteUserById(userId, (err) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send('User successfully deleted');
     }
   });
 };

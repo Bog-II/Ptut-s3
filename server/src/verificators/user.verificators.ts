@@ -13,6 +13,10 @@ export const isUserValid = (user: User) => {
   );
 };
 
+export const isIdValid = (user: User) => {
+  return true;
+}
+
 export const isPasswordValid = (password: string) => {
   // To change
   return true;
