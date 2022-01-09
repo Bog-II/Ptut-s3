@@ -11,3 +11,10 @@
 .document-title {
   margin-left: 1em;
 }
+
+.page-header {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  align-items: center;
+}

@@ -73,9 +73,11 @@ const Home = () => {
             }: document) => {
               const documentEndPoint = `/docs/${_id}`;
               const lastUpdatedate = new Date(lastModificationDate);
-              const date = lastUpdatedate.getDate() + 1;
+              const date = lastUpdatedate.getDate();
               const month = lastUpdatedate.getMonth() + 1;
               const year = lastUpdatedate.getFullYear();
+              const hour = lastUpdatedate.getHours();
+              const minute = lastUpdatedate.getMinutes();
 
               return (
                 <li key={_id} className="document">
@@ -85,7 +87,7 @@ const Home = () => {
                     </Link>
                   </span>
                   <span>{`${_id}`}</span>
-                  <span>{`${date}/${month}/${year}`}</span>
+                  <span>{`${hour}h${minute}  -  ${date}/${month}/${year}`}</span>
                 </li>
               );
             }
