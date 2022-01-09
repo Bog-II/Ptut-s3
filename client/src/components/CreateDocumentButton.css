@@ -1,0 +1,8 @@
+.create-document-form {
+  width: 20%;
+  display: flex;
+  column-gap: 20px;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 10px;
+}

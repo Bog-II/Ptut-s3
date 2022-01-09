@@ -35,3 +35,19 @@ export const createDocumentInDB = (
     }
   });
 };
+
+export const getDocumentsByUserId = (
+  userId: string,
+  callback: (err: Error | null, res: Object[]) => void
+) => {
+  Document.find(
+    { users: { $elemMatch: { userId: userId } } },
+    (errQuery, documents) => {
+      if (errQuery) {
+        callback(errQuery, []);
+      } else {
+        callback(null, documents);
+      }
+    }
+  );
+};

@@ -7,6 +7,7 @@ import {
   getUserById,
   updateUserById,
 } from '../models/users.model';
+import { RequestWithId } from '../verificators/jwt.verificators';
 
 import {
   isEmailValid,
@@ -86,10 +87,8 @@ export const updateUser = (req: Request, res: Response) => {
   });
 };
 
-export const deleteUser = (req: Request, res: Response) => {
-  const userId = req.params.id;
-
-  deleteUserById(userId, (err) => {
+export const deleteUser = (req: RequestWithId, res: Response) => {
+  deleteUserById(req.id, (err) => {
     if (err) {
       res.status(500).send(err);
     } else {

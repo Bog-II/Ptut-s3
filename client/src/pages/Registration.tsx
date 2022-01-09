@@ -1,15 +1,50 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../components/Logo';
 import './Registration.css';
 
 const Registration = () => {
-  var formField = {
-    justifyContent: 'center',
-    fontSize: 25,
+  const username = useRef<HTMLInputElement>(null);
+  const email = useRef<HTMLInputElement>(null);
+  const password = useRef<HTMLInputElement>(null);
+  const confirmedPassword = useRef<HTMLInputElement>(null);
+
+  const [messageToDisplay, setMessageToDisplay] = useState('');
+
+  const onSubmitClick = async () => {
+    const passwordVal = password?.current?.value;
+    const confirmedPasswordVal = confirmedPassword?.current?.value;
+    if (passwordVal != confirmedPasswordVal) {
+      setMessageToDisplay('Password and confirmed password do not match');
+      return;
+    }
+    setMessageToDisplay('');
+
+    const emailVal = email?.current?.value;
+    const usernameVal = username?.current?.value;
+
+    const response = await fetch('http://localhost:80/api/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        userName: usernameVal,
+        email: emailVal,
+        password: passwordVal,
+      }),
+      mode: 'cors',
+    });
+    console.log(response);
+
+    const json = await response.json();
+    setMessageToDisplay(JSON.stringify(json));
+    console.log(json);
   };
+
   return (
-    <div>
+    <div className="registration">
       <header>
         <div className="header">
           <h3>
@@ -19,43 +54,32 @@ const Registration = () => {
           </h3>
         </div>
       </header>
-      <div className="registration">
+      <div className="registration-form">
         <h1>Registration</h1>
-        <div className="fieldBox">
-          <form style={formField} className="formBox	axtion">
-            <label>
-              Nom :
-              <input type="text" name="name" required />
-            </label>
-            <br />
-            <label>
-              Prenom :
-              <input type="text" name="firstname" required />
-            </label>
-            <br />
-            <label>
-              Pseudo :
-              <input type="text" name="pseudo" required />
-            </label>
-            <br />
-            <label>
-              Adresse mail :
-              <input type="text" name="email" required />
-            </label>
-            <br />
-            <label>
-              Mot-de-passe :
-              <input type="password" name="password" required />
-            </label>
-            <br />
-            <label>
-              confirmation mot-de-passe :
-              <input type="password" name="confirm_password" required />
-            </label>
-            <br />
-            <input type="submit" value="Envoyer" name="register" />
-          </form>
+
+        <div className="input-field">
+          <label>Username :</label>
+          <input type="text" ref={username} required />
         </div>
+
+        <div className="input-field">
+          <label>Adresse mail :</label>
+          <input type="email" ref={email} required />
+        </div>
+
+        <div className="input-field">
+          <label>Mot-de-passe :</label>
+          <input type="password" ref={password} required />
+        </div>
+
+        <div className="input-field">
+          <label>Confirmation du mot-de-passe :</label>
+          <input type="password" ref={confirmedPassword} required />
+        </div>
+
+        <input type="submit" value="Envoyer" onClick={onSubmitClick} />
+
+        {messageToDisplay}
       </div>
     </div>
   );

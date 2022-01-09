@@ -23,7 +23,7 @@ const Authentification = () => {
     //   mode: 'no-cors',
     // });
 
-    fetch('http://localhost:80/api/auth/login', {
+    const response = await fetch('http://localhost:80/api/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -34,14 +34,12 @@ const Authentification = () => {
         password: passwordVal,
       }),
       mode: 'cors',
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        const jwt = json.token;
-        console.log(jwt);
-        setJWT(jwt);
-        localStorage.setItem('jwt_token', jwt);
-      });
+    });
+    const json = await response.json();
+    const jwt = json.token;
+    console.log(jwt);
+    setJWT(jwt);
+    localStorage.setItem('jwt_token', jwt);
   };
 
   return (

@@ -4,3 +4,24 @@
   align-items: center;
   flex-direction: column;
 }
+
+.documents-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.documents {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 10px;
+  width: 40%;
+}
+
+.document {
+  display: flex;
+  justify-content: space-between;
+}

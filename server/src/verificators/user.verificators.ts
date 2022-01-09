@@ -32,7 +32,7 @@ export const isEmailValid = (email: string) => {
   return email.includes('@') && email.includes('.');
 };
 
-export const isIdExisting = async (userId: number) => {
+export const isUserIdExisting = async (userId: string) => {
   const user = await User.findOne({ _id: userId });
   return user !== null;
 };

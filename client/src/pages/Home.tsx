@@ -1,21 +1,97 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import CreateDocumentButton from '../components/CreateDocumentButton';
+import Header from '../components/Header';
 import './Home.css';
 
+interface document {
+  _id: string;
+  documentName: string;
+  creationDate: string;
+  lastModificationDate: string;
+}
+
 const Home = () => {
+  const [documents, setDocuments] = useState<document[]>([]);
+  const jwt_token = localStorage.getItem('jwt_token');
+
+  const fetchDocuments = async () => {
+    if (jwt_token == null) {
+      return;
+    }
+
+    fetch('http://localhost/api/users/documents', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        jwt_token: `${jwt_token}`,
+      },
+      mode: 'cors',
+    }).then((response) => {
+      response.json().then((json) => {
+        setDocuments(json);
+      });
+    });
+  };
+
+  useEffect(() => {
+    fetchDocuments();
+  }, []);
+
+  if (jwt_token == null) {
+    return (
+      <div className="home">
+        <h1>Home Page</h1>
+        <Link to={'/registration'}>
+          <h2>Registration</h2>
+        </Link>
+
+        <Link to={'/authentification'}>
+          <h2>Log in</h2>
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <div className="home">
+      <Header />
       <h1>Home Page</h1>
-      <Link to={'/docs'}>
-        <h2>docs</h2>
-      </Link>
-      <Link to={'/registration'}>
-        <h2>Registration</h2>
-      </Link>
 
-      <Link to={'/authentification'}>
-        <h2>Log in</h2>
-      </Link>
+      <CreateDocumentButton onClickExecute={fetchDocuments} />
+
+      <div className="documents-section">
+        <h2>Documents</h2>
+        <ul className="documents">
+          {documents.map(
+            ({
+              _id,
+              documentName,
+              creationDate,
+              lastModificationDate,
+            }: document) => {
+              const documentEndPoint = `/docs/${_id}`;
+              const lastUpdatedate = new Date(lastModificationDate);
+              const date = lastUpdatedate.getDate() + 1;
+              const month = lastUpdatedate.getMonth() + 1;
+              const year = lastUpdatedate.getFullYear();
+
+              return (
+                <li key={_id} className="document">
+                  <span>
+                    <Link to={documentEndPoint} target="_blank">
+                      {documentName}
+                    </Link>
+                  </span>
+                  <span>{`${_id}`}</span>
+                  <span>{`${date}/${month}/${year}`}</span>
+                </li>
+              );
+            }
+          )}
+        </ul>
+      </div>
     </div>
   );
 };

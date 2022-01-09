@@ -1,17 +1,20 @@
-.header{
-    text-align: center;
+.registration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
-.headerText{
-    text-align: right;
+
+.registration-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 15px
 }
-.registration{
-    text-align: center;
-}
-.fieldBox{
-    margin-top: 0%;
-    margin-left: 25%;
-    margin-right: 25%;
-}
-.formBox{
-    text-align: justify;
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

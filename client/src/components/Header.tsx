@@ -10,10 +10,10 @@ const Header = () => {
         <Logo />
         <h1 className="document-title">{document.title}</h1>
       </div>
-      <div className="right-header">
+      {/* <div className="right-header">
         <ProfilePictures />
         <ShareButton />
-      </div>
+      </div> */}
     </div>
   );
 };
