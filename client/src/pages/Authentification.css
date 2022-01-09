@@ -1,18 +1,18 @@
-.header{
-    text-align: center;
-}
-.headerText{
-    text-align: right;
-}
-.autentification{
-    text-align: center;
+.autentification {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.fieldBox{
-    margin-top: 0%;
-    margin-left: 25%;
-    margin-right: 25%;
+.form-authentification {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
 }
-.formBox{
-    text-align: justify;
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
