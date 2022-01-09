@@ -1,7 +1,8 @@
 require('dotenv').config();
 
-const path = require('path');
-const express = require('express');
+import path from 'path';
+import express from 'express';
+import cors from 'cors';
 
 // Socket.io creation and connection
 const io = require('socket.io')(process.env.SOCKET_PORT, {
@@ -11,7 +12,6 @@ const io = require('socket.io')(process.env.SOCKET_PORT, {
       'http://localhost',
       'http://localhost:3000',
     ],
-    methods: ['GET', 'POST'],
   },
 });
 
@@ -77,6 +77,16 @@ io.on('connection', (socket) => {
 import { apiRouter } from './routes/api.route';
 
 const app = express();
+app.use(
+  cors({
+    origin: [
+      `http://localhost:${process.env.SERVER_PORT}`,
+      'http://localhost',
+      'http://localhost:3000',
+    ],
+  })
+);
+
 app.use('/api', apiRouter);
 
 // app.use(

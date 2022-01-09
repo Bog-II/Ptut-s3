@@ -5,14 +5,14 @@ import './Authentification.css';
 
 const Authentification = () => {
   const password = useRef<HTMLInputElement>(null);
-  const emailOrPasword = useRef<HTMLInputElement>(null);
+  const emailOrUsername = useRef<HTMLInputElement>(null);
   const [jwt, setJWT] = useState<string>('');
 
   const onSubmitClick = async () => {
     console.log(password?.current?.value);
 
     const passwordVal = password?.current?.value;
-    const emailOrPaswordVal = emailOrPasword?.current?.value;
+    const emailOrUsernameVal = emailOrUsername?.current?.value;
 
     // const response = await fetch('http://localhost/api/auth/login', {
     //   method: 'POST',
@@ -23,19 +23,25 @@ const Authentification = () => {
     //   mode: 'no-cors',
     // });
 
-    fetch('http://localhost/api/auth/login', {
+    fetch('http://localhost:80/api/auth/login', {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
       body: JSON.stringify({
-        email: emailOrPaswordVal,
+        emailOrUsername: emailOrUsernameVal,
         password: passwordVal,
       }),
-      mode: 'no-cors',
+      mode: 'cors',
     })
       .then((response) => response.json())
-      .then((json) => console.log(json));
-
-    // const data = await response.json();
-    // console.log(data);
+      .then((json) => {
+        const jwt = json.token;
+        console.log(jwt);
+        setJWT(jwt);
+        localStorage.setItem('jwt_token', jwt);
+      });
   };
 
   return (
@@ -55,7 +61,7 @@ const Authentification = () => {
       <div className="form-authentification">
         <div className="input-field">
           <label>Username ou Email:</label>
-          <input type="text" ref={emailOrPasword} required />
+          <input type="text" ref={emailOrUsername} required />
         </div>
 
         <div className="input-field">
@@ -65,10 +71,7 @@ const Authentification = () => {
 
         <input type="submit" onClick={onSubmitClick} />
       </div>
-      {/* 
-      <div>
-        {(jwt != '') ? jwt : }
-      </div> */}
+      {jwt}
     </div>
   );
 };

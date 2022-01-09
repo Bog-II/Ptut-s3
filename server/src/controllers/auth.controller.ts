@@ -7,7 +7,6 @@ import jwt from 'jsonwebtoken';
 export const loginUser = async (req: Request, res: Response) => {
   const { emailOrUsername, password } = req.body;
 
-  console.log(emailOrUsername, password);
   let user = await User.findOne({ email: emailOrUsername });
   if (user === null) {
     user = await User.findOne({ userName: emailOrUsername });
@@ -31,8 +30,6 @@ export const loginUser = async (req: Request, res: Response) => {
   // Create jwt token
   const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET_TOKEN);
   res.header('access_token', token);
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
 
   // Send jwt token
   res.status(200).send({ token: token });
