@@ -35,12 +35,13 @@ const Editor = () => {
   useEffect(() => {
     if (socket == null || quill == null) return;
 
-    socket.once('load-document', (content) => {
+    socket.once('load-document', (content, documentName) => {
+      document.title = documentName;
       quill.setContents(content);
       quill.enable();
     });
 
-    socket.emit('get-document', docId, "userId");
+    socket.emit('get-document', docId, 'userId');
   }, [socket, quill, docId]);
 
   // when server is broadcasting changes we apply them
@@ -130,7 +131,11 @@ const Editor = () => {
     setQuill(q);
   }, []);
 
-  return <div className="container" ref={wrapperRef}></div>;
+  return (
+    <div>
+      <div className="container" ref={wrapperRef}></div>
+    </div>
+  );
 };
 
 export default Editor;

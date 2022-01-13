@@ -45,7 +45,7 @@ io.on('connection', (socket) => {
   socket.on('get-document', async (docId: string, userId: string) => {
     const document = await findOrCreate(docId);
     socket.join(docId);
-    socket.emit('load-document', document.data);
+    socket.emit('load-document', document.data, document.documentName);
 
     console.log(`${userId} connected to ${docId}`);
     console.log(`${rooms.get(docId).size} persons are connected on ${docId}`);

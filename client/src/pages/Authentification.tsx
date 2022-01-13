@@ -14,15 +14,6 @@ const Authentification = () => {
     const passwordVal = password?.current?.value;
     const emailOrUsernameVal = emailOrUsername?.current?.value;
 
-    // const response = await fetch('http://localhost/api/auth/login', {
-    //   method: 'POST',
-    //   body: JSON.stringify({
-    //     email: emailOrPaswordVal,
-    //     password: passwordVal,
-    //   }),
-    //   mode: 'no-cors',
-    // });
-
     const response = await fetch('/api/auth/login', {
       method: 'POST',
       headers: {
