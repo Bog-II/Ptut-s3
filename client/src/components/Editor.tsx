@@ -20,6 +20,8 @@ const Editor = () => {
   useEffect(() => {
     setSocket(io('http://localhost:3001'));
 
+    console.log(docId);
+
     // on component unmount, we disconnect the socket
     return () => {
       console.log(socket);

@@ -82,6 +82,9 @@ const Home = () => {
               return (
                 <li key={_id} className="document">
                   <span>
+                    {/* <a href={documentEndPoint} target="_blank">
+                      {documentName}
+                    </a> */}
                     <Link to={documentEndPoint} target="_blank">
                       {documentName}
                     </Link>

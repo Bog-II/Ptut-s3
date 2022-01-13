@@ -22,9 +22,9 @@ import Document from './schemas/Document';
 
 export const findOrCreate = async (id) => {
   if (id == null) return;
-  
+
   const document = await Document.findById(id);
-  
+
   if (document) return document;
 
   return Document.create({
@@ -90,18 +90,16 @@ app.use(
   })
 );
 
+
+
 app.use('/api', apiRouter);
 
-// app.use(
-//   '/assets',
-//   express.static(path.join(__dirname, '../../client/dist/assets'))
-// );
-
-// app.get('*', (req, res) => {
-//   res.sendFile('index.html', {
-//     root: path.join(__dirname, '../../client/dist'),
-//   });
-// });
+app.use('/', express.static(path.join(__dirname, './dist')));
+app.get('*', (req, res) => {
+  res.sendFile('index.html', {
+    root: path.join(__dirname, './dist'),
+  });
+});
 
 app.listen(process.env.SERVER_PORT, () => {
   const PORT = process.env.SERVER_PORT;
