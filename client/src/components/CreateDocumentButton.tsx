@@ -22,7 +22,7 @@ const CreateDocumentButton: React.FC<Props> = ({ onClickExecute }) => {
       return;
     }
 
-    const response = await fetch('http://localhost/api/documents/', {
+    const response = await fetch('/api/documents/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

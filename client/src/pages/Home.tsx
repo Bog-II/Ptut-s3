@@ -20,7 +20,7 @@ const Home = () => {
       return;
     }
 
-    fetch('http://localhost/api/users/documents', {
+    fetch('/api/users/documents', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

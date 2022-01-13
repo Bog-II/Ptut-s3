@@ -23,7 +23,7 @@ const Registration = () => {
     const emailVal = email?.current?.value;
     const usernameVal = username?.current?.value;
 
-    const response = await fetch('http://localhost:80/api/auth/register', {
+    const response = await fetch('/api/auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
