@@ -15,6 +15,7 @@ const io = require('socket.io')(process.env.SOCKET_PORT, {
     // ],
     origin: '*',
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   },
 });
 
