@@ -18,7 +18,7 @@ const Editor = () => {
 
   // on component mount, we initialize the socket
   useEffect(() => {
-    setSocket(io('http://opendocs:3001'));
+    setSocket(io('http://localhost:3001'));
 
     console.log(docId);
 
