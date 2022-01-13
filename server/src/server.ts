@@ -9,6 +9,7 @@ const io = require('socket.io')(process.env.SOCKET_PORT, {
   cors: {
     origin: [
       `http://localhost:${process.env.SOCKET_PORT}`,
+      `http://localhost:${process.env.SERVER_PORT}`,
       'http://localhost',
       'http://localhost:3000',
     ],
@@ -83,14 +84,13 @@ const app = express();
 app.use(
   cors({
     origin: [
+      `http://localhost:${process.env.SOCKET_PORT}`,
       `http://localhost:${process.env.SERVER_PORT}`,
       'http://localhost',
       'http://localhost:3000',
     ],
   })
 );
-
-
 
 app.use('/api', apiRouter);
 
