@@ -1,8 +1,5 @@
 import { Schema, model } from 'mongoose';
 
-// Role:
-// 0 -> Lecteur
-// 1 -> Editeur
 const Document = new Schema({
   _id: { type: String, unique: true, required: true },
   data: {
@@ -13,6 +10,9 @@ const Document = new Schema({
   users: {
     type: [
       {
+        // Role:
+        // 0 -> Lecteur
+        // 1 -> Editeur
         userId: String,
         role: Number,
       },
