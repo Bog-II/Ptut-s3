@@ -1,0 +1,8 @@
+{
+  "a": "ru",
+  "appbar": {
+    "signup": "R1",
+    "signin": "R2",
+    "signout": "R3"
+  }
+}
