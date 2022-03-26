@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose';
+import User from './User';
 
 const Document = new Schema({
   _id: { type: String, unique: true, required: true },

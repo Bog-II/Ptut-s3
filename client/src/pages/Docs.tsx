@@ -1,6 +1,6 @@
 import React from 'react';
 import HeaderAppBar from '../components/appbar/HeaderAppBar';
-import Editor from '../components/Editor';
+import Editor from '../components/editor/Editor';
 import './Docs.css';
 
 const Docs = () => {

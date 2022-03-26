@@ -26,17 +26,6 @@ export const getAllUsers = (req: Request, res: Response) => {
   });
 };
 
-// export const getUserAvatar = (req: Request, res: Response) => {
-//   const userId = req.params.userId;
-//   getUserById(userId, (err, user) => {
-//     if (err) {
-//       res.status(500).send(err);
-//     } else {
-//       res.status(200).send(user.avatar);
-//     }
-//   });
-// }
-
 export const createUser = async (req: Request, res: Response) => {
   const { userName, password, email } = req.body;
 
