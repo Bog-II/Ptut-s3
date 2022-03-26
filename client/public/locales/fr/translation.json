@@ -1,14 +1,23 @@
 {
-  "appbar": {
-    "signup": "S'enregistrer",
-    "signin": "Se connecter",
-    "signout": "Se déconnecter"
+  "appBar": {
+    "signUp": "S'enregistrer",
+    "signIn": "Se connecter",
+    "signOut": "Se déconnecter"
   },
   "documents": {
     "title": "Documents",
     "createon": "Créé le",
     "creator": "Créateur",
     "lastmodification": "Dernière modification",
-    "size": "Taille"
+    "size": "Taille",
+
+    "noRowsLabel": "0 Documents",
+    "toolbarFilters": "Filtrer",
+
+    "toolbarDensity": "Densité",
+    "toolbarDensityLabel": "Densité",
+    "toolbarDensityCompact": "Faible",
+    "toolbarDensityStandard": "Moyenne",
+    "toolbarDensityComfortable": "Élevée"
   }
 }

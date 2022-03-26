@@ -28,11 +28,11 @@ export default function ButtonAppBar() {
 
         <Box sx={{ display: 'flex', columnGap: 1 }}>
           <Button variant="outlined" size="medium">
-            {t('appbar.signin')}
+            {t('appBar.signIn')}
           </Button>
 
           <Button variant="contained" size="medium">
-            {t('appbar.signup')}
+            {t('appBar.signUp')}
           </Button>
         </Box>
 

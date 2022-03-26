@@ -1,14 +1,23 @@
 {
-  "appbar": {
-    "signup": "Sign up",
-    "signin": "Sign in",
-    "signout": "Sign out"
+  "appBar": {
+    "signUp": "Sign up",
+    "signIn": "Sign in",
+    "signOut": "Sign out"
   },
   "documents": {
     "title": "Documents",
-    "createon": "Create On",
+    "createOn": "Create On",
     "creator": "Creator",
-    "lastmodification": "Last Modification",
-    "size": "Size"
+    "lastModification": "Last Modification",
+    "size": "Size",
+
+    "noRowsLabel": "0 Documents",
+    "toolbarFilters": "Filter",
+
+    "toolbarDensity": "Density",
+    "toolbarDensityLabel": "Density",
+    "toolbarDensityCompact": "Low",
+    "toolbarDensityStandard": "Medium",
+    "toolbarDensityComfortable": "High"
   }
 }

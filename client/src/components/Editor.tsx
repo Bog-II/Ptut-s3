@@ -89,7 +89,6 @@ const Editor = () => {
     const toolbarOptions = [
       [
         { header: [1, 2, 3, 4, 5, 6, false] },
-        { font: [1, 2, 3, 4, 5, 6, 7] },
         { size: ['small', false, 'large', 'huge'] },
       ],
       ['bold', 'italic', 'underline', 'strike'],
@@ -120,7 +119,7 @@ const Editor = () => {
       modules: {
         toolbar: toolbarOptions,
       },
-      readOnly: true,
+      readOnly: false,
     });
 
     q.disable();
@@ -131,9 +130,7 @@ const Editor = () => {
   }, []);
 
   return (
-    <div>
-      <div className="container" ref={wrapperRef}></div>
-    </div>
+    <div className="container" ref={wrapperRef}></div>
   );
 };
 

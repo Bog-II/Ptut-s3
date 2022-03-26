@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import HeaderAppBar from '../components/appbar/HeaderAppBar';
 import CreateDocumentButton from '../components/CreateDocumentButton';
 import { columns } from '../components/documents/columns';
+import { DocumentsDataGrid } from '../components/documents/DocumentsDataGrid';
 import { documentsData } from '../data/documentsDataGrid';
 import './Home.css';
 
@@ -66,22 +67,10 @@ const Home = () => {
 
       <CreateDocumentButton onClickExecute={fetchDocuments} />
 
+      <DocumentsDataGrid />
+
       <div className="documents-section">
         <h2>Documents</h2>
-
-        <Container>
-            <DataGridPro
-              rows={documentsData}
-              columns={columns}
-              pageSize={5}
-              autoHeight={true}
-              disableColumnPinning
-              disableColumnMenu
-              disableColumnResize
-              hideFooter
-              density="standard"
-            />
-        </Container>
 
         <ul className="documents">
           {documents.map(
