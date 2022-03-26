@@ -5,14 +5,10 @@ import './Editor.css';
 import { io, Socket } from 'socket.io-client';
 import { useParams } from 'react-router';
 
-interface Param {
-  id: string;
-}
-
 const saveInterval = 2000;
 
 const Editor = () => {
-  const { id: docId } = useParams<Param>();
+  const { id: docId } = useParams<string>();
   const [socket, setSocket] = useState<Socket>();
   const [quill, setQuill] = useState<Quill>();
 
@@ -124,6 +120,7 @@ const Editor = () => {
       modules: {
         toolbar: toolbarOptions,
       },
+      readOnly: true,
     });
 
     q.disable();
