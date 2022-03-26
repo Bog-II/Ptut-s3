@@ -1,8 +1,13 @@
+import { Container } from '@mui/material';
+import { DataGridPro } from '@mui/x-data-grid-pro';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import CreateDocumentButton from '../components/CreateDocumentButton';
+import { columns } from '../components/documents/columns';
 import Header from '../components/Header';
+import { documentsData } from '../data/documentsDataGrid';
 import './Home.css';
+
 
 interface document {
   _id: string;
@@ -63,6 +68,21 @@ const Home = () => {
 
       <div className="documents-section">
         <h2>Documents</h2>
+
+        <Container>
+            <DataGridPro
+              rows={documentsData}
+              columns={columns}
+              pageSize={5}
+              autoHeight={true}
+              disableColumnPinning
+              disableColumnMenu
+              disableColumnResize
+              hideFooter
+              density="standard"
+            />
+        </Container>
+
         <ul className="documents">
           {documents.map(
             ({
