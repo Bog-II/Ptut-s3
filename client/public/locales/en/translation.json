@@ -1,1 +1,14 @@
-{}
+{
+  "appbar": {
+    "signup": "Sign up",
+    "signin": "Sign in",
+    "signout": "Sign out"
+  },
+  "documents": {
+    "title": "Documents",
+    "createon": "Create On",
+    "creator": "Creator",
+    "lastmodification": "Last Modification",
+    "size": "Size"
+  }
+}

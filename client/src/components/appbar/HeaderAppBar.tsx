@@ -5,9 +5,10 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { IconButton, Tooltip } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
-// import { ThemeModeButton } from './ThemeModeButton';
-// import { ChangeLanguageSelect } from './ChangeLanguageSelect';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import { ThemeModeButton } from './ThemeModeButton';
+import { ChangeLanguageSelect } from './ChangeLanguageSelect';
 
 export default function ButtonAppBar() {
   const { t, i18n } = useTranslation();
@@ -22,8 +23,8 @@ export default function ButtonAppBar() {
           OpenDocs
         </Typography>
 
-        {/* <ThemeModeButton />
-        <ChangeLanguageSelect /> */}
+        <ChangeLanguageSelect />
+        <ThemeModeButton />
 
         <Box sx={{ display: 'flex', columnGap: 1 }}>
           <Button variant="outlined" size="medium">

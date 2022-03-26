@@ -2,9 +2,9 @@ import { Container } from '@mui/material';
 import { DataGridPro } from '@mui/x-data-grid-pro';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import HeaderAppBar from '../components/appbar/HeaderAppBar';
 import CreateDocumentButton from '../components/CreateDocumentButton';
 import { columns } from '../components/documents/columns';
-import Header from '../components/Header';
 import { documentsData } from '../data/documentsDataGrid';
 import './Home.css';
 
@@ -61,7 +61,7 @@ const Home = () => {
 
   return (
     <div className="home">
-      <Header />
+      <HeaderAppBar />
       <h1>Home Page</h1>
 
       <CreateDocumentButton onClickExecute={fetchDocuments} />

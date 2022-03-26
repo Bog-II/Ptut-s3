@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import Logo from '../components/Logo';
 import { Link } from 'react-router-dom';
 import './Authentification.css';
 
@@ -37,7 +36,6 @@ const Authentification = () => {
     <div className="autentification">
       <header>
         <div className="header">
-          <Logo />
           <h3>
             Don't have an account ?
             <Link to={'/Registration'}>Registration</Link>

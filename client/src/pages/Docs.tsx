@@ -1,12 +1,12 @@
 import React from 'react';
+import HeaderAppBar from '../components/appbar/HeaderAppBar';
 import Editor from '../components/Editor';
-import Header from '../components/Header';
 import './Docs.css';
 
 const Docs = () => {
   return (
     <div>
-      <Header />
+      <HeaderAppBar />
       <Editor />
     </div>
   );
