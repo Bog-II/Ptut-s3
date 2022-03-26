@@ -22,9 +22,7 @@ export const DocumentsDataGrid = () => {
 
   const { t, i18n } = useTranslation('documents');
 
-
   console.log('toolbarDensity', t('toolbarDensity'));
-
   const DATA_GRID_LOCALE_TEXT = {
     // 0 Documents
     noRowsLabel: t('noRowsLabel'),
@@ -39,6 +37,8 @@ export const DocumentsDataGrid = () => {
     toolbarDensityStandard: t('toolbarDensityStandard'),
     toolbarDensityComfortable: t('toolbarDensityComfortable'),
   };
+
+  console.log(DATA_GRID_LOCALE_TEXT);
 
   useEffect(() => {
     if (searchBarValue == '') {
@@ -55,7 +55,7 @@ export const DocumentsDataGrid = () => {
           return line.includes(searchBarValue.toLowerCase());
         });
         setFileredDocuments(filteredDocuments);
-      }, 500);
+      }, 600);
 
       return () => clearTimeout(delayFilterDocuments);
     }

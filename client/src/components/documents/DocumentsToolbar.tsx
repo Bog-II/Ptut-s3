@@ -28,11 +28,7 @@ export const DocumentsToolBar = () => {
         <DocumentsSearchBar />
       </Box>
 
-      <GridToolbarDensitySelector
-        // onChange?: FormEventHandler<T> | undefined;
-        // onChangeCapture?: FormEventHandler<T> | undefined;
-        onChangeCapture={() => console.log('onClick')}
-      />
+      <GridToolbarDensitySelector />
     </GridToolbarContainer>
   );
 };

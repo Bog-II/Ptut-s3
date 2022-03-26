@@ -1,11 +1,12 @@
 import { Clear, Search } from '@mui/icons-material';
 import { IconButton, InputAdornment, TextField } from '@mui/material';
 import React, { useContext, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { DocumentsDataGridContext } from '../../contexts/DocumentDataGridContext';
 
 export const DocumentsSearchBar = () => {
   const documentContext = useContext(DocumentsDataGridContext);
-  
+  const { t, i18n } = useTranslation('documents');
 
   const onValueClear = () => {
     documentContext.setSearchBarValue('');
@@ -19,7 +20,7 @@ export const DocumentsSearchBar = () => {
     <TextField
       id="standard-basic"
       fullWidth
-      label="Recherche"
+      label={t("search")}
       color="primary"
       value={documentContext.searchBarValue}
       onChange={onValueChange}
