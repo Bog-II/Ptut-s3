@@ -11,7 +11,7 @@ import { ThemeModeButton } from './ThemeModeButton';
 import { ChangeLanguageSelect } from './ChangeLanguageSelect';
 
 export default function ButtonAppBar() {
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation("appBar");
 
   return (
     <AppBar position="static" color="inherit">
@@ -28,11 +28,11 @@ export default function ButtonAppBar() {
 
         <Box sx={{ display: 'flex', columnGap: 1 }}>
           <Button variant="outlined" size="medium">
-            {t('appBar.signIn')}
+            {t('signIn')}
           </Button>
 
           <Button variant="contained" size="medium">
-            {t('appBar.signUp')}
+            {t('signUp')}
           </Button>
         </Box>
 

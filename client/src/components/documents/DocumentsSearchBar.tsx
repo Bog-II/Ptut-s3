@@ -5,6 +5,7 @@ import { DocumentsDataGridContext } from '../../contexts/DocumentDataGridContext
 
 export const DocumentsSearchBar = () => {
   const documentContext = useContext(DocumentsDataGridContext);
+  
 
   const onValueClear = () => {
     documentContext.setSearchBarValue('');

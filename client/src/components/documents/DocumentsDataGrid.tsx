@@ -20,27 +20,24 @@ export const DocumentsDataGrid = () => {
     [...documentsData]
   );
 
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation('documents');
 
-  const tDoc = (key: string) => {
-    return t('documents.' + key);
-  };
 
   console.log('toolbarDensity', t('toolbarDensity'));
 
   const DATA_GRID_LOCALE_TEXT = {
     // 0 Documents
-    noRowsLabel: tDoc('noRowsLabel'),
+    noRowsLabel: t('noRowsLabel'),
 
     // Filters button
-    toolbarFilters: tDoc('toolbarFilters'),
+    toolbarFilters: t('toolbarFilters'),
 
     // Density button
-    toolbarDensity: tDoc('toolbarDensity'),
-    toolbarDensityLabel: tDoc('toolbarDensityLabel'),
-    toolbarDensityCompact: tDoc('toolbarDensityCompact'),
-    toolbarDensityStandard: tDoc('toolbarDensityStandard'),
-    toolbarDensityComfortable: tDoc('toolbarDensityComfortable'),
+    toolbarDensity: t('toolbarDensity'),
+    toolbarDensityLabel: t('toolbarDensityLabel'),
+    toolbarDensityCompact: t('toolbarDensityCompact'),
+    toolbarDensityStandard: t('toolbarDensityStandard'),
+    toolbarDensityComfortable: t('toolbarDensityComfortable'),
   };
 
   useEffect(() => {

@@ -1,0 +1,18 @@
+{
+  "title": "Documents",
+  "createOn": "Create On",
+  "creator": "Creator",
+  "lastModification": "Last Modification",
+  "size": "Size",
+
+  "noRowsLabel": "0 Documents",
+  "toolbarFilters": "Filter",
+
+  "toolbarDensity": "Density",
+  "toolbarDensityLabel": "Density",
+  "toolbarDensityCompact": "Low",
+  "toolbarDensityStandard": "Medium",
+  "toolbarDensityComfortable": "High",
+
+  "search": "Search"
+}
