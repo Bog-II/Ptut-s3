@@ -2,9 +2,11 @@ import { Add } from '@mui/icons-material';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 export const CreateNewDocumentButton = () => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
 
   const [showDialog, setShowDialog] = useState(false);
 
@@ -16,6 +18,10 @@ export const CreateNewDocumentButton = () => {
     setShowDialog(false);
   }
 
+  const handleCreate = () => {
+    navigate('/registration');
+    handleClose();
+  }
   return (
     <>
       <Button
@@ -43,7 +49,7 @@ export const CreateNewDocumentButton = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>{t('cancel')}</Button>
-          <Button onClick={handleClose}>{t('create')}</Button>
+          <Button onClick={handleCreate}>{t('create')}</Button>
         </DialogActions>
       </Dialog>
     </>

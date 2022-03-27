@@ -61,7 +61,6 @@ const Editor = () => {
     if (quill == null || socket == null) return;
 
     const handler: TextChangeHandler = (delta) => {
-      console.log('delta : ' + delta);
       quill.updateContents(delta);
     };
 

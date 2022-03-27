@@ -18,21 +18,26 @@ export default function ButtonAppBar() {
     <AppBar position="static" color="inherit">
       <Toolbar
         variant="regular"
-        sx={{ display: 'flex', columnGap: 2, alignItems: 'center' }}
+        sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
       >
-        <LogoButton />
 
-        <ChangeLanguageSelect />
-        <ThemeModeButton />
+        <Box sx={{ display: 'flex', columnGap: 2, alignItems: 'center' }}>
+          <LogoButton />
+        </Box>
 
+        <Box sx={{ display: 'flex', columnGap: 2, alignItems: 'center' }}>
+          <ChangeLanguageSelect />
+          <ThemeModeButton />
 
-        {authContext.isLogged
-          ? <ProfileButton />
-          : <Box sx={{ display: 'flex', columnGap: 1 }}>
-            <AthentificationButton />
-            <RegistrationButton />
-          </Box>
-        }
+          {authContext.isLogged
+            ? <ProfileButton />
+            : <Box sx={{ display: 'flex', columnGap: 1 }}>
+              <AthentificationButton />
+              <RegistrationButton />
+            </Box>
+          }
+
+        </Box>
       </Toolbar>
     </AppBar>
   );

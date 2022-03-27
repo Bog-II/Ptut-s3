@@ -1,7 +1,8 @@
-import { AppBar, Toolbar } from '@mui/material'
+import { AppBar, Box, Toolbar } from '@mui/material'
 import React from 'react'
 import { ChangeLanguageSelect } from './components/ChangeLanguageSelect'
 import { ConnectedUsers } from './components/ConnectedUsers'
+import { DocumentNameTextField } from './components/DocumentNameTextField'
 import { EditorShareButton } from './components/EditorShareButton'
 import { LogoButton } from './components/LogoButton'
 import { ProfileButton } from './components/ProfileButton'
@@ -11,14 +12,19 @@ export const EditorAppBar = () => {
     <AppBar position="static" color="inherit">
       <Toolbar
         variant="regular"
-        sx={{ display: 'flex', columnGap: 2, alignItems: 'center' }}
+        sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
       >
-        <LogoButton />
+        <Box sx={{ display: 'flex', columnGap: 2, alignItems: 'center' }}>
+          <LogoButton />
+          <DocumentNameTextField pDocumentName='test' />
+        </Box>
 
-        <ConnectedUsers />
-        <EditorShareButton />
-        <ChangeLanguageSelect />
-        <ProfileButton />
+        <Box sx={{ display: 'flex', columnGap: 2, alignItems: 'center' }}>
+          <ConnectedUsers />
+          <EditorShareButton />
+          <ChangeLanguageSelect />
+          <ProfileButton />
+        </Box>
 
       </Toolbar>
     </AppBar>

@@ -7,8 +7,8 @@ export const ConnectedUsers = () => {
 
   return (
     <AvatarGroup max={5}>
-      {connectedPersons.map(([_, userName, randomColor]) =>
-        <Tooltip title={userName}>
+      {connectedPersons.map(([userId, userName, randomColor]) =>
+        <Tooltip key={userId} title={userName}>
           <Avatar sx={{ bgcolor: randomColor }}>
             {userName[0]}
           </Avatar>

@@ -10,7 +10,6 @@ const Docs = () => {
 
   console.log(authContext);
 
-
   if (!authContext.isLogged) {
     return <Navigate to='/' />
   }
