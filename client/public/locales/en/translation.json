@@ -10,11 +10,13 @@
   "lastModification": "Last Modification",
   "size": "Size",
 
-  "search": "Search",
   "cancel": "Cancel",
+  "undo": "Undo",
+  "search": "Search",
   "delete": "Delete",
   "rename": "Rename",
   "share": "Share",
+  "create": "Create",
   "openInNewTab": "Open in new tab",
 
   "noRowsLabel": "0 Documents",

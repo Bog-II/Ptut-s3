@@ -11,10 +11,12 @@
   "size": "Taille",
 
   "cancel": "Annuler",
+  "undo": "Annuler",
   "search": "Recherche",
   "delete": "Supprimer",
   "rename": "Renomer",
   "share": "Partager",
+  "create": "Créer",
   "openInNewTab": "Ouvrir dans un nouvel onglet",
 
   "noRowsLabel": "0 Documents",

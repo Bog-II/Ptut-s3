@@ -143,7 +143,7 @@ export const DocumentsDataGrid = () => {
         justifyContent: 'space-between'
       }}>
         <Typography variant="h2" component="h1">
-          {t('title')}
+          {t('documents')}
         </Typography>
 
         <CreateNewDocumentButton />
