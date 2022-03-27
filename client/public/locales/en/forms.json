@@ -7,5 +7,6 @@
   "userName": "User name",
   "alreadyHaveAnAccount": "Already have an account? Sign in",
   "donotHaveAnAccount": "Don't have an account? Sign up",
-  "confirmPassword": "Confirm password"
+  "confirmPassword": "Confirm password",
+  "userNameOrEmail": "User name or email"
 }

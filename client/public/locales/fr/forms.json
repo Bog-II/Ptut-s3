@@ -7,5 +7,6 @@
   "userName": "Nom d'utilisateur",
   "alreadyHaveAnAccount": "Vous posséder déjà un compte ? Se connecter",
   "donotHaveAnAccount": "Vous ne posséder pas encore de compte ? S'enregistrer",
-  "confirmPassword": "Confirmer le mot de passe"
+  "confirmPassword": "Confirmer le mot de passe",
+  "userNameOrEmail": "Nom d'utilisateur ou email"
 }

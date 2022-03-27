@@ -2,18 +2,18 @@ import { Link } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-export const AlreadyHaveAccountButton = () => {
+export const DoNotHaveAnAccount = () => {
 
   const { t, i18n } = useTranslation('forms');
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/authentification');
+    navigate('/registration');
   }
 
   return (
     <Link onClick={handleClick}>
-      {t('alreadyHaveAnAccount')}
+      {t('donotHaveAnAccount')}
     </Link>
   )
 }

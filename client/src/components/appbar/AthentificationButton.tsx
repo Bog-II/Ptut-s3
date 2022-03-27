@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 export const AthentificationButton = () => {
-  const { t, i18n } = useTranslation("appBar");
+  const { t, i18n } = useTranslation("forms");
   const navigate = useNavigate();
 
   const handleClick = () => {
