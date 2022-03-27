@@ -7,17 +7,9 @@ import {
 import {
   GridActionsCellItem,
   GridActionsColDef,
-  GridColDef,
-  GridRenderCellParams,
   GridRowParams,
 } from '@mui/x-data-grid-pro';
-import { t, getFixedT } from 'i18next'
 import { useTranslation } from 'react-i18next';
-import {
-  getDateString,
-  getSizeString,
-  getTimeString,
-} from '../../utils/Document';
 
 export const DocumentsDataGridActions: GridActionsColDef = {
   field: 'actions',

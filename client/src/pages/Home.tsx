@@ -2,7 +2,7 @@ import { Container } from '@mui/material';
 import { DataGridPro } from '@mui/x-data-grid-pro';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import HeaderAppBar from '../components/appbar/MainAppBar';
+import HeaderAppBar from '../components/appBars/MainAppBar';
 import CreateDocumentButton from '../components/CreateDocumentButton';
 import { DocumentsDataGrid } from '../components/documents/DocumentsDataGrid';
 import './Home.css';

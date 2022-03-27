@@ -2,7 +2,7 @@ import { DarkMode, LightMode } from '@mui/icons-material';
 import { IconButton, Tooltip } from '@mui/material';
 import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ThemeModeContext } from '../../contexts/ThemeModeContext';
+import { ThemeModeContext } from '../../../contexts/ThemeModeContext';
 
 export const ThemeModeButton = () => {
   const ThemeMode = useContext(ThemeModeContext);

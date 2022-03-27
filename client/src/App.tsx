@@ -22,7 +22,7 @@ export default function App() {
   const theme = mode === 'dark' ? darkTheme : lightTheme;
 
   // Logged
-  const [isLogged, setIsLogged] = useState<boolean>(false)
+  const [isLogged, setIsLogged] = useState<boolean>(true)
 
   const setThemeMode = (mode: PaletteMode) => {
     setMode(mode)
