@@ -131,32 +131,30 @@ export const DocumentsDataGrid = () => {
   };
 
   return (
-    <>
-      <Container>
-        <DocumentsDataGridContext.Provider
-          value={{
-            searchBarValue: searchBarValue,
-            setSearchBarValue: setSearchBarValue,
+    <Container>
+      <DocumentsDataGridContext.Provider
+        value={{
+          searchBarValue: searchBarValue,
+          setSearchBarValue: setSearchBarValue,
+        }}
+      >
+        <DataGridPro
+          rows={fileredDocuments}
+          columns={columns}
+          localeText={DATA_GRID_LOCALE_TEXT}
+          components={{
+            Toolbar: DocumentsToolBar,
           }}
-        >
-          <DataGridPro
-            rows={fileredDocuments}
-            columns={columns}
-            localeText={DATA_GRID_LOCALE_TEXT}
-            components={{
-              Toolbar: DocumentsToolBar,
-            }}
-            pageSize={5}
-            autoHeight={true}
-            disableColumnPinning
-            disableColumnMenu
-            disableColumnResize
-            onRowClick={handleRowClick}
-            hideFooter
-            density="standard"
-          />
-        </DocumentsDataGridContext.Provider>
-      </Container>
-    </>
+          pageSize={5}
+          autoHeight={true}
+          disableColumnPinning
+          disableColumnMenu
+          disableColumnResize
+          onRowClick={handleRowClick}
+          hideFooter
+          density="standard"
+        />
+      </DocumentsDataGridContext.Provider>
+    </Container>
   );
 };
