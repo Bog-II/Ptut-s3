@@ -38,8 +38,9 @@ const Editor = () => {
     // on component unmount, we disconnect the socket and reset theme 
     return () => {
       window.removeEventListener('beforeunload', cleanup);
+      cleanup();
     }
-    
+
   }, []);
 
   // we give our document id to the server to get attached to a room accordingly

@@ -1,6 +1,7 @@
 import { AppBar, Toolbar } from '@mui/material'
 import React from 'react'
 import { ChangeLanguageSelect } from './components/ChangeLanguageSelect'
+import { ConnectedUsers } from './components/ConnectedUsers'
 import { EditorShareButton } from './components/EditorShareButton'
 import { LogoButton } from './components/LogoButton'
 import { ProfileButton } from './components/ProfileButton'
@@ -14,6 +15,7 @@ export const EditorAppBar = () => {
       >
         <LogoButton />
 
+        <ConnectedUsers />
         <EditorShareButton />
         <ChangeLanguageSelect />
         <ProfileButton />
