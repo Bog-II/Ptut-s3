@@ -1,4 +1,4 @@
-import { Container } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import {
   DataGridPro,
   GridCallbackDetails,
@@ -13,6 +13,7 @@ import { DocumentsDataGridContext } from '../../contexts/DocumentDataGridContext
 import { documentsData } from '../../data/documentsDataGrid';
 import { DocumentInterface } from '../../interfaces/DocumentInterface';
 import { getDateString, getSizeString, getTimeString } from '../../utils/Document';
+import { CreateNewDocumentButton } from './CreateNewDocumentButton';
 import { DocumentsDataGridActions } from './DocumentsDataGridActions';
 import { DocumentsToolBar } from './DocumentsToolbar';
 
@@ -131,7 +132,23 @@ export const DocumentsDataGrid = () => {
   };
 
   return (
-    <Container>
+    <Container sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      rowGap: 'max(5%, 10px)'
+    }}>
+      <Box sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+      }}>
+        <Typography variant="h2" component="h1">
+          {t('title')}
+        </Typography>
+
+        <CreateNewDocumentButton />
+      </Box>
+
       <DocumentsDataGridContext.Provider
         value={{
           searchBarValue: searchBarValue,
