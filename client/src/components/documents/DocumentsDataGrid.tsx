@@ -303,8 +303,8 @@ export const DocumentsDataGrid = () => {
               value={dialogDocumentName}
               margin="dense"
               id="name"
-              label="Nom du document"
-              type="email"
+              label={t('renameDocument')}
+              onChange={(event) => setDialogDocumentName(event.target.value)}
               fullWidth
               variant="standard" />
           </DialogContent>

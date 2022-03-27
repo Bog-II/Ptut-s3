@@ -42,8 +42,8 @@ export const CreateNewDocumentButton = () => {
             autoFocus
             margin="dense"
             id="name"
-            label="Nom du document"
-            type="email"
+            label={t('documentName')}
+            type="text"
             fullWidth
             variant="standard" />
         </DialogContent>
