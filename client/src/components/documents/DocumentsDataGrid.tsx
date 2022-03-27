@@ -12,6 +12,7 @@ import {
 } from '@mui/x-data-grid-pro';
 import React, { SyntheticEvent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { DocumentsDataGridContext } from '../../contexts/DocumentDataGridContext';
 import { documentsData } from '../../data/documentsDataGrid';
 import { DocumentInterface } from '../../interfaces/DocumentInterface';
@@ -235,9 +236,8 @@ export const DocumentsDataGrid = () => {
     event: MuiEvent<React.MouseEvent>,
     details: GridCallbackDetails
   ) => {
-    console.log(params);
-    console.log(event);
-    console.log(details);
+    const { id } = params.row;
+    openInNewTab(`/docs/${id}`)
   };
 
   return (
