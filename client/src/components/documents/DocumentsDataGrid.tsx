@@ -23,7 +23,7 @@ export const DocumentsDataGrid = () => {
     [...documentsData]
   );
 
-  const { t, i18n } = useTranslation('documents');
+  const { t, i18n } = useTranslation();
 
   const DATA_GRID_LOCALE_TEXT = {
     // 0 Documents

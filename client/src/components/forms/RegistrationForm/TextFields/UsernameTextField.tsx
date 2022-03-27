@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next';
 
 export const UsernameTextField = () => {
-  const { t, i18n } = useTranslation('forms');
+  const { t, i18n } = useTranslation();
 
   const [value, setValue] = useState<string>('');
 

@@ -4,7 +4,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next';
 
 export const CreateNewDocumentButton = () => {
-  const { t, i18n } = useTranslation('documents');
+  const { t, i18n } = useTranslation();
 
   return (
     <Button size="large" variant="contained" startIcon={<Add />}>

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const AlreadyHaveAccountButton = () => {
 
-  const { t, i18n } = useTranslation('forms');
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
   const handleClick = () => {

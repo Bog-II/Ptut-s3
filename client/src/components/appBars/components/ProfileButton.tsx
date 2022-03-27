@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const ProfileButton = () => {
   const navigate = useNavigate();
-  const { t, i18n } = useTranslation("appBar");
+  const { t, i18n } = useTranslation();
   const tooltipText = t('profile');
 
   const handleProfileButtonClick = () => {

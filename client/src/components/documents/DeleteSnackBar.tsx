@@ -1,9 +1,11 @@
 import { Close } from '@mui/icons-material';
 import { Button, IconButton, Snackbar } from '@mui/material';
 import { SyntheticEvent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const DocumentDataGridCellSnackBar = () => {
   const [openSnackBar, setOpenSnackBar] = useState(true);
+  const { t, i18n } = useTranslation();
 
   const closeSnackBar = () => {
     setOpenSnackBar(false);
@@ -26,7 +28,7 @@ export const DocumentDataGridCellSnackBar = () => {
   const action = (
     <>
       <Button color="primary" size="small" onClick={closeSnackBar}>
-        Annuler
+        {t('cancel')}
       </Button>
       <IconButton size="small" color="inherit" onClick={deleteDocument}>
         <Close />

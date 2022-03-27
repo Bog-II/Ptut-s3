@@ -19,7 +19,7 @@ export const DocumentsDataGridActions: GridActionsColDef = {
       return [];
     }
 
-    const { t, i18n } = useTranslation('documents');
+    const { t, i18n } = useTranslation();
 
     return [
       <GridActionsCellItem

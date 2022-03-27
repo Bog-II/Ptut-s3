@@ -1,1 +1,39 @@
-{}
+{
+  "profile": "Profile",
+  "dark": "Dark",
+  "light": "Light",
+
+  "documents": "Documents",
+  "documentName": "Document name",
+  "createdOn": "Created On",
+  "creator": "Creator",
+  "lastModification": "Last Modification",
+  "size": "Size",
+
+  "search": "Search",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "rename": "Rename",
+  "share": "Share",
+  "openInNewTab": "Open in new tab",
+
+  "noRowsLabel": "0 Documents",
+  "toolbarFilters": "Filter",
+  "toolbarDensity": "Density",
+  "toolbarDensityLabel": "Density",
+  "toolbarDensityCompact": "Low",
+  "toolbarDensityStandard": "Medium",
+  "toolbarDensityComfortable": "High",
+  "newDocument": "New Document",
+
+  "signIn": "Sign in",
+  "signUp": "Sign up",
+  "signOut": "Sign out",
+  "password": "Password",
+  "emailAdress": "Email address",
+  "userName": "User name",
+  "alreadyHaveAnAccount": "Already have an account? Sign in",
+  "donotHaveAnAccount": "Don't have an account? Sign up",
+  "confirmPassword": "Confirm password",
+  "userNameOrEmail": "User name or email"
+}

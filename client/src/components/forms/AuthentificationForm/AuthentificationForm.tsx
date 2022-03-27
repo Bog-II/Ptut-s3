@@ -7,7 +7,7 @@ import { IdTextField } from './TextFields/IdTextField'
 import { PasswordTextField } from './TextFields/PasswordTextField'
 
 export const AuthentificationForm = () => {
-  const { t, i18n } = useTranslation('forms');
+  const { t, i18n } = useTranslation();
 
   return (
     <>

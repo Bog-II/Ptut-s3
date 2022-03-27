@@ -6,7 +6,7 @@ import { ThemeModeContext } from '../../../contexts/ThemeModeContext';
 
 export const ThemeModeButton = () => {
   const ThemeMode = useContext(ThemeModeContext);
-  const { t, i18n } = useTranslation("appBar");
+  const { t, i18n } = useTranslation();
 
   const themeMode = ThemeMode.themeMode;
   const setThemeMode = ThemeMode.setThemeMode;

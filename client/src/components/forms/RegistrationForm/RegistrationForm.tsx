@@ -9,7 +9,7 @@ import { PasswordTextField } from './TextFields/PasswordTextField';
 import { UsernameTextField } from './TextFields/UsernameTextField';
 
 export const RegistrationForm = () => {
-  const { t, i18n } = useTranslation('forms');
+  const { t, i18n } = useTranslation();
 
   return (
     <>

@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next';
 
 export const ConfirmPasswordTextField = () => {
-  const { t, i18n } = useTranslation('forms');
+  const { t, i18n } = useTranslation();
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [value, setValue] = useState<string>('');
