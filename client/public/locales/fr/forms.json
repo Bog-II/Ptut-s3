@@ -1,0 +1,10 @@
+{
+  "signIn": "Se connecter",
+  "signUp": "S'enregistrer",
+  "signOut": "Se déconnecter",
+  "password": "Mot de passe",
+  "emailAdress": "Adresse email",
+  "alreadyHaveAnAccount": "Vous posséder déjà un compte ? Se connecter",
+  "donotHaveAnAccount": "Vous ne posséder pas encore de compte ? S'enregistrer",
+  "confirmPassword": "Confirme le mot de passe"
+}

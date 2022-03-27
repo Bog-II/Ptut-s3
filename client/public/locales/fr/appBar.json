@@ -1,5 +1,5 @@
 {
-  "signUp": "S'enregistrer",
-  "signIn": "Se connecter",
-  "signOut": "Se déconnecter"
+  "profile": "Profile",
+  "dark": "Sombre",
+  "light": "Clair"
 }

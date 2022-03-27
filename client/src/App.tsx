@@ -43,8 +43,7 @@ export default function App() {
         <AuthContext.Provider value={{
           isLogged: isLogged,
           setIsLogged: setIsLogged
-        }
-        }>
+        }}>
           <Router>
             <Routes>
               <Route path="/" element={<Home />} />

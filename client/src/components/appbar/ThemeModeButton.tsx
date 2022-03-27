@@ -1,10 +1,12 @@
 import { DarkMode, LightMode } from '@mui/icons-material';
-import { IconButton } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
 import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ThemeModeContext } from '../../contexts/ThemeModeContext';
 
 export const ThemeModeButton = () => {
   const ThemeMode = useContext(ThemeModeContext);
+  const { t, i18n } = useTranslation("appBar");
 
   const themeMode = ThemeMode.themeMode;
   const setThemeMode = ThemeMode.setThemeMode;
@@ -17,9 +19,13 @@ export const ThemeModeButton = () => {
     }
   };
 
+  const tooltipText = themeMode === 'light' ? t('dark') : t('light')
+
   return (
-    <IconButton onClick={onHandleClickThemeModeButton}>
-      {themeMode === 'light' ? <LightMode /> : <DarkMode />}
-    </IconButton>
+    <Tooltip title={tooltipText}>
+      <IconButton onClick={onHandleClickThemeModeButton}>
+        {themeMode === 'light' ? <LightMode /> : <DarkMode />}
+      </IconButton>
+    </Tooltip>
   );
 };
