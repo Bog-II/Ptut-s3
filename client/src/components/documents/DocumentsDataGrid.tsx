@@ -352,7 +352,7 @@ export const DocumentsDataGrid = () => {
                 endAdornment: (
                   <InputAdornment position="end">
                     {shareEditorId != '' ? (
-                      <Tooltip title={t('copy')}>
+                      <Tooltip title={t('copy').toString()}>
                         <IconButton onClick={() => copyToClipboard(shareEditorId)}>
                           <ContentPaste />
                         </IconButton>
@@ -373,7 +373,7 @@ export const DocumentsDataGrid = () => {
                 endAdornment: (
                   <InputAdornment position="end">
                     {shareLectureId != '' ? (
-                      <Tooltip title={t('copy')}>
+                      <Tooltip title={t('copy').toString()}>
                         <IconButton onClick={() => copyToClipboard(shareLectureId)}>
                           <ContentPaste />
                         </IconButton>
