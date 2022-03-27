@@ -4,6 +4,7 @@
   "signOut": "Se déconnecter",
   "password": "Mot de passe",
   "emailAdress": "Adresse email",
+  "userName": "Nom d'utilisateur",
   "alreadyHaveAnAccount": "Vous posséder déjà un compte ? Se connecter",
   "donotHaveAnAccount": "Vous ne posséder pas encore de compte ? S'enregistrer",
   "confirmPassword": "Confirme le mot de passe"
