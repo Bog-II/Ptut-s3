@@ -1,5 +1,5 @@
 import { Close, Delete, DriveFileRenameOutline, Link, OpenInNew } from '@mui/icons-material';
-import { Box, Button, Container, IconButton, LinearProgress, Snackbar, Typography } from '@mui/material';
+import { Box, Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, LinearProgress, Snackbar, TextField, Typography } from '@mui/material';
 import {
   DataGridPro,
   GridActionsCellItem,
@@ -74,6 +74,26 @@ export const DocumentsDataGrid = () => {
   // Delete Snackbar - End
 
 
+  // Rename Dialog - Start
+  const [renameDialogOpen, setRenameDialogOpen] = useState<boolean>(false);
+  const [dialogDocumentName, setDialogDocumentName] = useState<string>('');
+
+  const showRenameDialog = (documentIdToRename: string) => {
+    setRenameDialogOpen(true);
+    setDialogDocumentName(documentIdToRename);
+  }
+
+  const handleRenameDocument = () => {
+    console.log('renameDocument', dialogDocumentName);
+    closeRenameDialog();
+  }
+
+  const closeRenameDialog = () => {
+    setRenameDialogOpen(false);
+    setDialogDocumentName('')
+  }
+
+  // Rename Dialog - End
 
   const DATA_GRID_LOCALE_TEXT = {
     // 0 Documents
@@ -109,7 +129,7 @@ export const DocumentsDataGrid = () => {
         />,
         <GridActionsCellItem
           icon={<DriveFileRenameOutline />}
-          onClick={() => console.log('TextFields')}
+          onClick={() => showRenameDialog(id)}
           label={t('rename')}
           showInMenu
         />,
@@ -271,6 +291,28 @@ export const DocumentsDataGrid = () => {
           message="Supprimer le document"
           action={action}
         />
+
+        <Dialog
+          open={renameDialogOpen}
+          onClose={closeRenameDialog}
+          fullWidth>
+          <DialogTitle>{t('renameDocument')}</DialogTitle>
+          <DialogContent>
+            <TextField
+              autoFocus
+              value={dialogDocumentName}
+              margin="dense"
+              id="name"
+              label="Nom du document"
+              type="email"
+              fullWidth
+              variant="standard" />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={closeRenameDialog}>{t('cancel')}</Button>
+            <Button onClick={handleRenameDocument}>{t('rename')}</Button>
+          </DialogActions>
+        </Dialog>
       </DocumentsDataGridContext.Provider>
     </Container>
   );
