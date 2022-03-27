@@ -26,7 +26,8 @@ export const RegistrationForm = () => {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          width: 'min(95%, 700px)'
+          width: 'min(95%, 700px)',
+          m: 'max(8%, 20px)',
         }}
       >
         <h1>{t("signUp")}</h1>
