@@ -4,9 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import HeaderAppBar from '../components/appbar/MainAppBar';
 import CreateDocumentButton from '../components/CreateDocumentButton';
-import { columns } from '../components/documents/DocumentsDataGridActions';
 import { DocumentsDataGrid } from '../components/documents/DocumentsDataGrid';
-import { documentsData } from '../data/documentsDataGrid';
 import './Home.css';
 
 
