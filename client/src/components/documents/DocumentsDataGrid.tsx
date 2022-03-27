@@ -1,29 +1,79 @@
-import { Box, Container, Typography } from '@mui/material';
+import { Close, Delete, DriveFileRenameOutline, Link, OpenInNew } from '@mui/icons-material';
+import { Box, Button, Container, IconButton, Snackbar, Typography } from '@mui/material';
 import {
   DataGridPro,
+  GridActionsCellItem,
+  GridActionsColDef,
   GridCallbackDetails,
   GridColDef,
   GridRenderCellParams,
   GridRowParams,
   MuiEvent,
 } from '@mui/x-data-grid-pro';
-import React, { useEffect, useState } from 'react';
+import React, { SyntheticEvent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DocumentsDataGridContext } from '../../contexts/DocumentDataGridContext';
 import { documentsData } from '../../data/documentsDataGrid';
 import { DocumentInterface } from '../../interfaces/DocumentInterface';
-import { getDateString, getSizeString, getTimeString } from '../../utils/Document';
+import { getDateString, getSizeString, getTimeString, openInNewTab } from '../../utils/Document';
 import { CreateNewDocumentButton } from './CreateNewDocumentButton';
-import { DocumentsDataGridActions } from './DocumentsDataGridActions';
 import { DocumentsToolBar } from './DocumentsToolbar';
 
 export const DocumentsDataGrid = () => {
+  const { t, i18n } = useTranslation();
+
   const [searchBarValue, setSearchBarValue] = useState<string>('');
   const [fileredDocuments, setFileredDocuments] = useState<DocumentInterface[]>(
     [...documentsData]
   );
 
-  const { t, i18n } = useTranslation();
+  // Delete Snackbar - Start
+  const [openSnackBar, setOpenSnackBar] = useState(false);
+  const [snackBarId, setSnackBarId] = useState<string>('');
+
+  const deleteDocumentById = (id: string) => {
+    if (snackBarId != '') {
+      deleteDocument();
+    }
+
+    setTimeout(() => {
+      setSnackBarId(id);
+      setOpenSnackBar(true);
+    }, 44)
+  }
+
+  const handleCloseSnackBar = (
+    event: SyntheticEvent<any> | Event,
+    reason: string
+  ) => {
+    if (reason === 'timeout') {
+      deleteDocument();
+    }
+  };
+
+  const deleteDocument = () => {
+    console.log('deleteFile', snackBarId);
+    hideSnackBar();
+  };
+
+  const hideSnackBar = () => {
+    setOpenSnackBar(false);
+    setSnackBarId('');
+  };
+
+  const action = (
+    <>
+      <Button color="primary" size="small" onClick={hideSnackBar}>
+        {t('cancel')}
+      </Button>
+      <IconButton size="small" color="inherit" onClick={deleteDocument}>
+        <Close />
+      </IconButton>
+    </>
+  );
+  // Delete Snackbar - End
+
+
 
   const DATA_GRID_LOCALE_TEXT = {
     // 0 Documents
@@ -38,6 +88,45 @@ export const DocumentsDataGrid = () => {
     toolbarDensityCompact: t('toolbarDensityCompact'),
     toolbarDensityStandard: t('toolbarDensityStandard'),
     toolbarDensityComfortable: t('toolbarDensityComfortable'),
+  };
+
+  const DocumentsDataGridActions: GridActionsColDef = {
+    field: 'actions',
+    type: 'actions',
+    getActions: (params: GridRowParams) => {
+      if (params.id <= 2) {
+        return [];
+      }
+
+      const { id } = params.row;
+
+      return [
+        <GridActionsCellItem
+          icon={<Delete />}
+          label={t('delete')}
+          onClick={() => deleteDocumentById(id)}
+          showInMenu
+        />,
+        <GridActionsCellItem
+          icon={<DriveFileRenameOutline />}
+          onClick={() => console.log('TextFields')}
+          label={t('rename')}
+          showInMenu
+        />,
+        <GridActionsCellItem
+          icon={<Link />}
+          onClick={() => console.log('Partager')}
+          label={t('share')}
+          showInMenu
+        />,
+        <GridActionsCellItem
+          icon={<OpenInNew />}
+          onClick={() => openInNewTab(`/docs/${id}`)}
+          label={t('openInNewTab')}
+          showInMenu
+        />,
+      ];
+    },
   };
 
   const columns: GridColDef[] = [
@@ -170,6 +259,15 @@ export const DocumentsDataGrid = () => {
           onRowClick={handleRowClick}
           hideFooter
           density="standard"
+        />
+
+        <Snackbar
+          open={openSnackBar}
+          autoHideDuration={5000}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+          onClose={handleCloseSnackBar}
+          message="Supprimer le document"
+          action={action}
         />
       </DocumentsDataGridContext.Provider>
     </Container>

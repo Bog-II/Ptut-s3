@@ -32,3 +32,7 @@ export const getSizeString = (size: number) => {
   size = Math.ceil(size / 1000);
   return `${size} Go`;
 };
+
+export const openInNewTab = (url: string) => {
+  window?.open(url, '_blank')?.focus();
+};

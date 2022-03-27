@@ -14,7 +14,6 @@ export const DocumentNameTextField = (props: DocumentInput) => {
 
   return (
     <TextField
-      required
       label={t("documentName")}
       value={documentName}
       onChange={(e) => setDocumentName(e.target.value)}
