@@ -54,3 +54,7 @@ export const getRandomColor = () => {
   const randomColorIndex = Math.floor(Math.random() * colors.length);
   return colors[randomColorIndex][darkIntensity];
 };
+
+export const copyToClipboard = async (textToCopy: string) => {
+  return navigator.clipboard.writeText(textToCopy);
+};

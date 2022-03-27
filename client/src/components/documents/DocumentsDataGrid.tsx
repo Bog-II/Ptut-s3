@@ -1,5 +1,5 @@
-import { Close, Delete, DriveFileRenameOutline, Link, OpenInNew } from '@mui/icons-material';
-import { Box, Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, LinearProgress, Snackbar, TextField, Typography } from '@mui/material';
+import { Close, ContentPaste, Delete, DriveFileRenameOutline, Link, OpenInNew } from '@mui/icons-material';
+import { Box, Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, InputAdornment, LinearProgress, Snackbar, TextField, Tooltip, Typography } from '@mui/material';
 import {
   DataGridPro,
   GridActionsCellItem,
@@ -17,6 +17,7 @@ import { DocumentsDataGridContext } from '../../contexts/DocumentDataGridContext
 import { documentsData } from '../../data/documentsDataGrid';
 import { DocumentInterface } from '../../interfaces/DocumentInterface';
 import { getDateString, getSizeString, getTimeString, openInNewTab } from '../../utils/Document';
+import { copyToClipboard } from '../../utils/Editor';
 import { CreateNewDocumentButton } from './CreateNewDocumentButton';
 import { DocumentsToolBar } from './DocumentsToolbar';
 
@@ -93,8 +94,25 @@ export const DocumentsDataGrid = () => {
     setRenameDialogOpen(false);
     setDialogDocumentName('')
   }
-
   // Rename Dialog - End
+
+  // Share Dialog - Start
+  const [shareDialogoOpen, setShareDialogoOpen] = useState<boolean>(false);
+  const [shareEditorId, setShareEditorId] = useState<string>('');
+  const [shareLectureId, setShareLectureId] = useState<string>('');
+
+  const showShareDialog = (documentId: string) => {
+    console.log(documentId);
+    setShareEditorId('linkEditor');
+    setShareLectureId('linkLecture');
+    setShareDialogoOpen(true);
+  }
+
+  const hideShareDialog = () => {
+    setShareDialogoOpen(false);
+  }
+
+  // Share Dialog - End
 
   const DATA_GRID_LOCALE_TEXT = {
     // 0 Documents
@@ -136,7 +154,7 @@ export const DocumentsDataGrid = () => {
         />,
         <GridActionsCellItem
           icon={<Link />}
-          onClick={() => console.log('Partager')}
+          onClick={() => showShareDialog(id)}
           label={t('share')}
           showInMenu
         />,
@@ -292,6 +310,7 @@ export const DocumentsDataGrid = () => {
           action={action}
         />
 
+        {/* Rename Dialog - Start */}
         <Dialog
           open={renameDialogOpen}
           onClose={closeRenameDialog}
@@ -302,8 +321,7 @@ export const DocumentsDataGrid = () => {
               autoFocus
               value={dialogDocumentName}
               margin="dense"
-              id="name"
-              label={t('renameDocument')}
+              label={t('documentName')}
               onChange={(event) => setDialogDocumentName(event.target.value)}
               fullWidth
               variant="standard" />
@@ -313,6 +331,63 @@ export const DocumentsDataGrid = () => {
             <Button onClick={handleRenameDocument}>{t('rename')}</Button>
           </DialogActions>
         </Dialog>
+        {/* Rename Dialog - End */}
+
+
+        {/* Share Dialog - Start */}
+        <Dialog
+          open={shareDialogoOpen}
+          onClose={hideShareDialog}
+          fullWidth>
+          <DialogTitle>{t('shareDocument')}</DialogTitle>
+          <DialogContent>
+            <TextField
+              autoFocus
+              value={shareEditorId}
+              margin="dense"
+              label={t('editor')}
+              fullWidth
+              variant="outlined"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    {shareEditorId != '' ? (
+                      <Tooltip title={t('copy')}>
+                        <IconButton onClick={() => copyToClipboard(shareEditorId)}>
+                          <ContentPaste />
+                        </IconButton>
+                      </Tooltip>
+                    ) : null}
+                  </InputAdornment>
+                ),
+              }} />
+
+            <TextField
+              autoFocus
+              value={shareLectureId}
+              margin="dense"
+              label={t('lecture')}
+              fullWidth
+              variant="outlined"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    {shareLectureId != '' ? (
+                      <Tooltip title={t('copy')}>
+                        <IconButton onClick={() => copyToClipboard(shareLectureId)}>
+                          <ContentPaste />
+                        </IconButton>
+                      </Tooltip>
+                    ) : null}
+                  </InputAdornment>
+                ),
+              }} />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={hideShareDialog}>{t('hide')}</Button>
+          </DialogActions>
+        </Dialog>
+        {/* Share Dialog - End */}
       </DocumentsDataGridContext.Provider>
     </Container>
   );

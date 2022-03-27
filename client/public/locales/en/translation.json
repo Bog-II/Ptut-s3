@@ -17,8 +17,13 @@
   "rename": "Rename",
   "renameDocument": "Rename Document",
   "share": "Share",
+  "shareDocument": "Share document",
   "create": "Create",
   "openInNewTab": "Open in new tab",
+  "lecture": "Lecture",
+  "editor": "Editor",
+  "hide": "Hide",
+  "copy": "Copy",
 
   "noRowsLabel": "0 Documents",
   "toolbarFilters": "Filter",
