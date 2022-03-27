@@ -1,6 +1,7 @@
+import { Container } from '@mui/material';
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Authentification.css';
+import { AuthentificationForm } from '../components/forms/AuthentificationForm/AuthentificationForm';
 
 const Authentification = () => {
   const password = useRef<HTMLInputElement>(null);
@@ -33,7 +34,7 @@ const Authentification = () => {
   };
 
   return (
-    <div className="autentification">
+    <Container>
       <header>
         <div className="header">
           <h3>
@@ -59,7 +60,9 @@ const Authentification = () => {
         <input type="submit" onClick={onSubmitClick} />
       </div>
       {jwt}
-    </div>
+
+      <AuthentificationForm />
+    </Container >
   );
 };
 

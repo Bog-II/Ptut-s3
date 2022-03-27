@@ -1,5 +1,7 @@
+import { Container } from '@mui/material';
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { RegistrationForm } from '../components/forms/RegistrationForm/RegistrationForm';
 
 const Registration = () => {
   const username = useRef<HTMLInputElement>(null);
@@ -42,7 +44,7 @@ const Registration = () => {
   };
 
   return (
-    <div className="registration">
+    <Container>
       <header>
         <div className="header">
           <h3>
@@ -78,7 +80,9 @@ const Registration = () => {
 
         {messageToDisplay}
       </div>
-    </div>
+
+      <RegistrationForm />
+    </Container>
   );
 };
 
