@@ -11,17 +11,23 @@ import Home from './pages/Home';
 import Registration from './pages/Registration';
 import { v4 } from 'uuid';
 import { CssBaseline, PaletteMode, ThemeProvider } from '@mui/material';
-import { darkTheme, lightTheme, ThemeModeContext } from './contexts/ThemeModeContext';
+import { darkTheme, getLocalThemeMode, lightTheme, setLocalThemeMode, ThemeModeContext } from './contexts/ThemeModeContext';
 
 export default function App() {
-  const [mode, setMode] = useState<PaletteMode>('dark');
+  const defaultThemeMode = getLocalThemeMode();
+  const [mode, setMode] = useState<PaletteMode>(defaultThemeMode);
   const theme = mode === 'dark' ? darkTheme : lightTheme;
+
+  const setThemeMode = (mode: PaletteMode) => {
+    setMode(mode)
+    setLocalThemeMode(mode);
+  }
 
   return (
     <ThemeModeContext.Provider
       value={{
         themeMode: mode,
-        setThemeMode: setMode,
+        setThemeMode: setThemeMode,
       }}
     >
       <ThemeProvider theme={theme}>

@@ -1,6 +1,8 @@
 {
   "title": "Documents",
-  "createOn": "Create On",
+
+  "documentName": "Document name",
+  "createdOn": "Create On",
   "creator": "Creator",
   "lastModification": "Last Modification",
   "size": "Size",
@@ -14,5 +16,10 @@
   "toolbarDensityStandard": "Medium",
   "toolbarDensityComfortable": "High",
 
-  "search": "Search"
+  "search": "Search",
+
+  "delete": "Delete",
+  "rename": "Rename",
+  "share": "Share",
+  "openInNewTab": "Open in new tab"
 }

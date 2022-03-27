@@ -1,5 +1,5 @@
 import React from 'react';
-import HeaderAppBar from '../components/appbar/HeaderAppBar';
+import HeaderAppBar from '../components/appbar/MainAppBar';
 import Editor from '../components/editor/Editor';
 import './Docs.css';
 

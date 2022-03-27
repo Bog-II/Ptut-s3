@@ -1,8 +1,10 @@
 {
   "title": "Documents",
-  "createon": "Créé le",
+
+  "documentName": "Nom du document",
+  "createdOn": "Créé le",
   "creator": "Créateur",
-  "lastmodification": "Dernière modification",
+  "lastModification": "Dernière modification",
   "size": "Taille",
 
   "noRowsLabel": "0 Documents",
@@ -14,5 +16,10 @@
   "toolbarDensityStandard": "Moyenne",
   "toolbarDensityComfortable": "Élevée",
 
-  "search": "Recherche"
+  "search": "Recherche",
+
+  "delete": "Supprimer",
+  "rename": "Renomer",
+  "share": "Partager",
+  "openInNewTab": "Ouvrir dans un nouvel onglet"
 }

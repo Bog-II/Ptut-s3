@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/material';
+import { createTheme, PaletteMode } from '@mui/material';
 import React from 'react';
 import { ThemeModeInterface } from '../interfaces/ThemeModeInterface';
 
@@ -18,3 +18,14 @@ export const lightTheme = createTheme({
     mode: 'light',
   },
 });
+
+export const getLocalThemeMode = (): PaletteMode => {
+  if (localStorage.getItem('themeMode') == 'light') {
+    return 'light';
+  }
+  return 'dark';
+};
+
+export const setLocalThemeMode = (themeMode: PaletteMode): void => {
+  localStorage.setItem('themeMode', themeMode);
+};

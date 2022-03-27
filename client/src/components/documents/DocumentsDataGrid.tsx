@@ -2,6 +2,8 @@ import { Container } from '@mui/material';
 import {
   DataGridPro,
   GridCallbackDetails,
+  GridColDef,
+  GridRenderCellParams,
   GridRowParams,
   MuiEvent,
 } from '@mui/x-data-grid-pro';
@@ -11,7 +13,7 @@ import { DocumentsDataGridContext } from '../../contexts/DocumentDataGridContext
 import { documentsData } from '../../data/documentsDataGrid';
 import { DocumentInterface } from '../../interfaces/DocumentInterface';
 import { getDateString, getSizeString, getTimeString } from '../../utils/Document';
-import { columns } from './columns';
+import { DocumentsDataGridActions } from './DocumentsDataGridActions';
 import { DocumentsToolBar } from './DocumentsToolbar';
 
 export const DocumentsDataGrid = () => {
@@ -22,7 +24,6 @@ export const DocumentsDataGrid = () => {
 
   const { t, i18n } = useTranslation('documents');
 
-  console.log('toolbarDensity', t('toolbarDensity'));
   const DATA_GRID_LOCALE_TEXT = {
     // 0 Documents
     noRowsLabel: t('noRowsLabel'),
@@ -38,7 +39,65 @@ export const DocumentsDataGrid = () => {
     toolbarDensityComfortable: t('toolbarDensityComfortable'),
   };
 
-  console.log(DATA_GRID_LOCALE_TEXT);
+  const columns: GridColDef[] = [
+    {
+      field: 'documentName',
+      headerName: t('documentName'),
+      flex: 1,
+      sortable: true,
+      align: 'center',
+      headerAlign: 'center',
+      type: 'string',
+    },
+    {
+      field: 'documentCreatorId',
+      headerName: t('creator'),
+      sortable: true,
+      flex: 1,
+      align: 'center',
+      headerAlign: 'center',
+      type: 'string',
+    },
+    {
+      field: 'creationDate',
+      headerName: t('createdOn'),
+      type: 'date',
+      flex: 1,
+      sortable: true,
+      align: 'center',
+      headerAlign: 'center',
+      renderCell: (params: GridRenderCellParams) => {
+        const lastModificationTime = params.row.lastModificationTime;
+        return getDateString(lastModificationTime);
+      },
+    },
+    {
+      field: 'lastModificationTime',
+      headerName: t('lastModification'),
+      type: 'date',
+      flex: 1,
+      sortable: true,
+      align: 'center',
+      headerAlign: 'center',
+      renderCell: (params: GridRenderCellParams) => {
+        const lastModificationTime = params.row.lastModificationTime;
+        return getTimeString(lastModificationTime);
+      },
+    },
+    {
+      field: 'documentSize',
+      headerName: t('size'),
+      type: 'number',
+      flex: 1,
+      sortable: true,
+      align: 'center',
+      headerAlign: 'center',
+      renderCell: (params: GridRenderCellParams) => {
+        return getSizeString(params.row.documentSize);
+      },
+    },
+    DocumentsDataGridActions,
+  ];
 
   useEffect(() => {
     if (searchBarValue == '') {

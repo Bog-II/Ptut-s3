@@ -1,9 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import Quill, { EventEmitter, TextChangeHandler } from 'quill';
 import 'quill/dist/quill.snow.css';
 import './Editor.css';
 import { io, Socket } from 'socket.io-client';
 import { useParams } from 'react-router';
+import { ThemeModeContext } from '../../contexts/ThemeModeContext';
 
 const saveInterval = 2000;
 
@@ -12,21 +13,33 @@ const Editor = () => {
   const [socket, setSocket] = useState<Socket>();
   const [quill, setQuill] = useState<Quill>();
 
+  const ThemeMode = useContext(ThemeModeContext);
+
+  const prevThemeMode = ThemeMode.themeMode;
+  ThemeMode.setThemeMode('light');
+
   // on component mount, we initialize the socket
   useEffect(() => {
     setSocket(io('http://localhost:3001'));
 
     console.log(docId);
 
-    // on component unmount, we disconnect the socket
-    return () => {
+    const cleanup = () => {
       console.log(socket);
       console.log(docId);
-
       if (socket) {
         socket.disconnect();
       }
-    };
+      ThemeMode.setThemeMode(prevThemeMode)
+    }
+
+    window.addEventListener('beforeunload', cleanup);
+
+    // on component unmount, we disconnect the socket and reset theme 
+    return () => {
+      window.removeEventListener('beforeunload', cleanup);
+    }
+    
   }, []);
 
   // we give our document id to the server to get attached to a room accordingly
