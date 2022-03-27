@@ -1,5 +1,5 @@
 import { Close, Delete, DriveFileRenameOutline, Link, OpenInNew } from '@mui/icons-material';
-import { Box, Button, Container, IconButton, Snackbar, Typography } from '@mui/material';
+import { Box, Button, Container, IconButton, LinearProgress, Snackbar, Typography } from '@mui/material';
 import {
   DataGridPro,
   GridActionsCellItem,
@@ -249,6 +249,7 @@ export const DocumentsDataGrid = () => {
           columns={columns}
           localeText={DATA_GRID_LOCALE_TEXT}
           components={{
+            LoadingOverlay: LinearProgress,
             Toolbar: DocumentsToolBar,
           }}
           pageSize={5}
@@ -256,6 +257,7 @@ export const DocumentsDataGrid = () => {
           disableColumnPinning
           disableColumnMenu
           disableColumnResize
+          loading={false}
           onRowClick={handleRowClick}
           hideFooter
           density="standard"
