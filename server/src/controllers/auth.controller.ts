@@ -1,15 +1,21 @@
-import { Request, Response } from 'express';
+import { CookieOptions, Request, Response } from 'express';
 import User from '../schemas/User';
 import { comparePasswords, getHashedPassword } from '../utils/password.util';
 
 import jwt from 'jsonwebtoken';
 
 export const loginUser = async (req: Request, res: Response) => {
-  const { emailOrUsername, password } = req.body;
+  const { email, username, password } = req.body;
 
-  let user = await User.findOne({ email: emailOrUsername });
-  if (user === null) {
-    user = await User.findOne({ userName: emailOrUsername });
+  if (email == null && username == null) {
+    return res.status(400).send('Email or Username is required');
+  }
+
+  let user;
+  if (email != null) {
+    user = await User.findOne({ email: email });
+  } else {
+    user = await User.findOne({ username: username });
   }
 
   // email and username are invalid
@@ -29,8 +35,14 @@ export const loginUser = async (req: Request, res: Response) => {
 
   // Create jwt token
   const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET_TOKEN);
-  res.header('access_token', token);
+
+  const cookieOptions: CookieOptions = {
+    maxAge: 1000 * 24 * 60 * 60 * 7,
+    httpOnly: true,
+  };
+
+  res.cookie('access_token', token, cookieOptions);
 
   // Send jwt token
-  res.status(200).send({ token: token });
+  res.status(200).send({ success: true });
 };

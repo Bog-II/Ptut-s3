@@ -3,6 +3,7 @@ require('dotenv').config();
 import path from 'path';
 import express from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
 // Socket.io creation and connection
 const io = require('socket.io')(process.env.SOCKET_PORT, {
@@ -83,6 +84,7 @@ io.on('connection', (socket) => {
 import { apiRouter } from './routes/api.route';
 
 const app = express();
+app.use(cookieParser());
 app.use(
   cors({
     origin: ['*'],

@@ -15,7 +15,7 @@ export const getAllUsersFromDB = (
 };
 
 export const createUserDB = async (
-  userName: string,
+  username: string,
   password: string,
   email: string,
   callback: (err: Error | null, res: any) => void
@@ -23,7 +23,7 @@ export const createUserDB = async (
   const hashedPassword = await getHashedPassword(password);
   const user = {
     _id: uuidv4(),
-    userName: userName,
+    username: username,
     password: hashedPassword,
     email: email,
   };

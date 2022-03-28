@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { CookieOptions, Request, Response } from 'express';
 
 import {
   createUserDB,
@@ -35,6 +35,7 @@ export const createUser = async (req: Request, res: Response) => {
   if (!arePropertiesValid) {
     return res.status(400).send('Email or Username already exists');
   }
+
 
   createUserDB(userName, password, email, (err, user) => {
     if (err) {
