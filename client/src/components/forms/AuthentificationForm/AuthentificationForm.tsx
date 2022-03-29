@@ -1,7 +1,6 @@
 import { Box, Grid, Link } from '@mui/material'
 import React, { FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
-import { DoNotHaveAnAccount } from './DoNotHaveAnAccount'
 import { FormButton } from '../FormButton'
 import { IdTextField } from './TextFields/IdTextField'
 import { PasswordTextField } from './TextFields/PasswordTextField'

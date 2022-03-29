@@ -13,9 +13,9 @@ usersRouter.get('/', getAllUsers);
 // usersRouter.get('/', authJWT, getUser);
 // usersRouter.get('/:id/avatar', getUserAvatar);
 usersRouter.post('/', createUser);
-usersRouter.put('/', authJWT, updateUser);
+usersRouter.put('/', updateUser);
 
-usersRouter.delete('/', authJWT, deleteUser);
-usersRouter.get('/documents', authJWT, getDocumentsWithJWT);
+usersRouter.delete('/', deleteUser);
+usersRouter.get('/documents', getDocumentsWithJWT);
 
 export { usersRouter };
