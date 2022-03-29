@@ -15,6 +15,10 @@ export const signupUser = async (
     }),
   });
 
-  const json = response.json();
-  return json;
+  if (response.ok) {
+    const json = await response.json();
+    return json;
+  }
+
+  throw new Error('Error while signing up user');
 };

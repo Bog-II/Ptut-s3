@@ -46,5 +46,7 @@
   "usernameOrEmail": "Nom d'utilisateur ou email",
   "passwordsNotEqual": "Les mots de passe ne sont pas identiques",
   "passwordLengthMinimum": "Le mot de passe doit contenir au moins 4 caractères",
-  "emailInvalid": "L'adresse email est invalide"
+  "emailInvalid": "L'adresse email est invalide",
+  "signUpSuccess": "La création de compte a réussi",
+  "signUpError": "La création de compte a échoué"
 }

@@ -46,5 +46,7 @@
   "usernameOrEmail": "User name or email",
   "passwordsNotEqual": "Passwords are not equal",
   "passwordLengthMinimum": "Password length must be at least 4 characters",
-  "emailInvalid": "Email is invalid"
+  "emailInvalid": "Email is invalid",
+  "signUpSuccess": "Successfully signed up",
+  "signUpError": "Error signing up"
 }

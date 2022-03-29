@@ -8,6 +8,7 @@ interface User {
 
 export const isUserValid = async (user: User) => {
   const { username, password, email } = user;
+  console.log(username, password, email);
   const emailExist = await isEmailExisting(email);
   const usernameExist = await isUsernameExisting(username);
   return (
@@ -19,13 +20,11 @@ export const isUserValid = async (user: User) => {
 };
 
 export const isPasswordValid = (password: string) => {
-  // To change
-  return true;
+  return password != '';
 };
 
-export const isUsernameValid = (useName: string) => {
-  // To change
-  return true;
+export const isUsernameValid = (username: string) => {
+  return username != '';
 };
 
 export const isEmailValid = (email: string) => {

@@ -27,6 +27,7 @@ export const getAllUsers = (req: Request, res: Response) => {
 };
 
 export const createUser = async (req: Request, res: Response) => {
+
   const { username, password, email } = req.body;
 
   const userToVerify = { username: username, password: password, email: email };

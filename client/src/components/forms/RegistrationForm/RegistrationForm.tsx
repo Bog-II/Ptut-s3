@@ -1,12 +1,12 @@
 import { Clear, Visibility, VisibilityOff } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
-import { Alert, Button, Grid, IconButton, InputAdornment, Link, Snackbar, TextField } from '@mui/material'
+import { Alert, Grid, IconButton, InputAdornment, Link, Snackbar, TextField } from '@mui/material'
 import { Box } from '@mui/system';
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { signupUser } from '../../../api/auth.api';
 import { isEmailValid } from '../../../utils/Forms';
-import { FormButton } from '../FormButton';
 
 export const RegistrationForm = () => {
   const { t, i18n } = useTranslation();
@@ -28,22 +28,33 @@ export const RegistrationForm = () => {
   const emailValid = (emailValue == '') || isEmailValid(emailValue);
   const arePasswordsEqual = (confirmPasswordValue == '') || (passwordValue == confirmPasswordValue);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  // Snackbar
+  const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
+  const [isSnackBarMessageSuccess, setIsSnackBarMessageSuccess] = useState<boolean>(false);
+  const alertSnackBarSeverity = isSnackBarMessageSuccess ? 'success' : 'error';
 
   const handleLinkClick = () => {
     navigate('/authentification');
   }
 
-  const oneSubmitButtonClicked = (event: React.FormEvent<HTMLFormElement>) => {
+  const oneSubmitButtonClicked = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (usernameValid && emailValid && passwordValid && arePasswordsEqual) {
-      console.log('clicked');
-
       setIsLoading(true);
+      try {
+        await signupUser(usernameValue, emailValue, passwordValue);
+        setIsSnackBarMessageSuccess(true);
+      } catch (error) {
+        console.error(error);
+        setIsSnackBarMessageSuccess(false);
+      }
+      setShowSnackbar(true);
+      setIsLoading(false);
     }
   };
-
 
   return (
     <>
@@ -189,19 +200,29 @@ export const RegistrationForm = () => {
               </Grid>
             </Grid>
 
-
             <LoadingButton
               variant="contained"
               type="submit"
               size="large"
               loading={isLoading}
-              loadingPosition="end"
             >
               {t("signUp")}
             </LoadingButton>
           </Grid>
         </Box>
 
+        <Snackbar
+          open={showSnackbar}
+          autoHideDuration={6000}
+          onClose={() => setShowSnackbar(false)}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "center"
+          }}>
+          <Alert severity={alertSnackBarSeverity}>
+            {isSnackBarMessageSuccess ? t('signUpSuccess') : t('signUpError')}
+          </Alert>
+        </Snackbar>
       </Box>
     </>
   )
