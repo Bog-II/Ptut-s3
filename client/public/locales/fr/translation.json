@@ -48,5 +48,8 @@
   "passwordLengthMinimum": "Le mot de passe doit contenir au moins 4 caractères",
   "emailInvalid": "L'adresse email est invalide",
   "signUpSuccess": "La création de compte a réussi",
-  "signUpError": "La création de compte a échoué"
+  "signUpError": "La création de compte a échoué",
+  "signInSuccess": "La connexion a réussi",
+  "signInError": "La connexion a échoué",
+  "welcomeTitle": "Bienvenue sur OpenDocs"
 }

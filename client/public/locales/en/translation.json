@@ -48,5 +48,8 @@
   "passwordLengthMinimum": "Password length must be at least 4 characters",
   "emailInvalid": "Email is invalid",
   "signUpSuccess": "Successfully signed up",
-  "signUpError": "Error signing up"
+  "signUpError": "Error signing up",
+  "signInSuccess": "Successfully signed in",
+  "signInError": "Error signing in",
+  "welcomeTitle": "Welcome to OpenDocs"
 }

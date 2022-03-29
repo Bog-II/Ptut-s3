@@ -15,29 +15,6 @@ export const IdTextField = () => {
   const showClearIcon = value === "" ? false : true;
 
   return (
-    <TextField
-      required
-      fullWidth
-      label={t("usernameOrEmail")}
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-      color="primary"
-      name="username"
-      autoComplete="username"
-      type="username"
-      InputProps={{
-        endAdornment: (
-          <InputAdornment position="end">
-            {showClearIcon
-              ? <IconButton onClick={handleClearInput}>
-                <Clear />
-              </IconButton>
-              : null
-            }
-          </InputAdornment>
-        ),
-      }}
-      autoFocus
-    />
+    <></>
   )
 }

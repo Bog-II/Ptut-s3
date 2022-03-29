@@ -11,6 +11,7 @@ const languagesKey: [string, string][] = [
   ['en', 'English'],
   ['fr', 'Français'],
   ['ru', 'Pусский'],
+  ['de', 'Deutsch'],
 ];
 
 export const ChangeLanguageSelect = () => {

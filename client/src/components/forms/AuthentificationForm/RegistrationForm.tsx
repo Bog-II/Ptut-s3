@@ -5,7 +5,7 @@ import { Box } from '@mui/system';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { signupUser } from '../../../api/auth.api';
+import { signUpUser } from '../../../api/auth.api';
 import { isEmailValid } from '../../../utils/Forms';
 
 export const RegistrationForm = () => {
@@ -45,7 +45,7 @@ export const RegistrationForm = () => {
     if (usernameValid && emailValid && passwordValid && arePasswordsEqual) {
       setIsLoading(true);
       try {
-        await signupUser(emailValue, usernameValue, passwordValue);
+        await signUpUser(emailValue, usernameValue, passwordValue);
         setIsSnackBarMessageSuccess(true);
       } catch (error) {
         console.error(error);
@@ -211,19 +211,20 @@ export const RegistrationForm = () => {
           </Grid>
         </Box>
 
-        <Snackbar
-          open={showSnackbar}
-          autoHideDuration={6000}
-          onClose={() => setShowSnackbar(false)}
-          anchorOrigin={{
-            vertical: "top",
-            horizontal: "center"
-          }}>
-          <Alert severity={alertSnackBarSeverity}>
-            {isSnackBarMessageSuccess ? t('signUpSuccess') : t('signUpError')}
-          </Alert>
-        </Snackbar>
       </Box>
+      
+      <Snackbar
+        open={showSnackbar}
+        autoHideDuration={6000}
+        onClose={() => setShowSnackbar(false)}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center"
+        }}>
+        <Alert severity={alertSnackBarSeverity}>
+          {isSnackBarMessageSuccess ? t('signUpSuccess') : t('signUpError')}
+        </Alert>
+      </Snackbar>
     </>
   )
 }

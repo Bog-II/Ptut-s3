@@ -37,7 +37,7 @@ export const loginUser = async (req: Request, res: Response) => {
   const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET_TOKEN);
 
   const cookieOptions: CookieOptions = {
-    maxAge: 1000 * 24 * 60 * 60 * 7,
+    maxAge: 1000 * 60 * 60 * 24 * 7,
     httpOnly: true,
   };
 

@@ -262,7 +262,8 @@ export const DocumentsDataGrid = () => {
     <Container sx={{
       display: 'flex',
       flexDirection: 'column',
-      rowGap: 'max(5%, 10px)'
+      rowGap: 'max(5%, 10px)',
+      m: 'max(8%, 20px)',
     }}>
       <Box sx={{
         display: 'flex',
