@@ -36,8 +36,6 @@ export const createUser = async (req: Request, res: Response) => {
     return res.status(400).send('Email or Username already exists');
   }
 
-  console.log('passed');
-
   createUserDB(username, password, email, (err, user) => {
     if (err) {
       res.status(500).send(err);
