@@ -2,7 +2,7 @@ import { Container } from '@mui/material';
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import MainAppBar from '../components/appBars/MainAppBar';
-import { AuthentificationForm } from '../components/forms/AuthentificationForm/AuthentificationForm';
+import { AuthentificationForm } from '../components/forms/AuthentificationForm';  
 
 const Authentification = () => {
   // const password = useRef<HTMLInputElement>(null);

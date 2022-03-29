@@ -5,8 +5,8 @@ import { Box } from '@mui/system';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { signUpUser } from '../../../api/auth.api';
-import { isEmailValid } from '../../../utils/Forms';
+import { signUpUser } from '../../api/auth.api';
+import { isEmailValid } from '../../utils/Forms';
 
 export const RegistrationForm = () => {
   const { t, i18n } = useTranslation();

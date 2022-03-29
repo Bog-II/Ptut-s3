@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Clear, Visibility, VisibilityOff } from '@mui/icons-material'
 import { LoadingButton } from '@mui/lab'
-import { isEmailValid } from '../../../utils/Forms'
-import { signInUserWithEmail, signInUserWithUsername } from '../../../api/auth.api'
-import { AuthContext } from '../../../contexts/AuthContext'
+import { isEmailValid } from '../../utils/Forms';
+import { signInUserWithEmail, signInUserWithUsername } from '../../api/auth.api';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export const AuthentificationForm = () => {
   const { t, i18n } = useTranslation();
@@ -45,7 +45,7 @@ export const AuthentificationForm = () => {
       }
       setIsSnackBarMessageSuccess(true);
       authContext.setIsLogged(true);
-      
+
       navigate('/');
     } catch (error) {
       console.error(error);

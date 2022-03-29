@@ -14,13 +14,12 @@ export const WelcomeCard = () => {
       alignItems: 'center',
       flexDirection: 'column',
       rowGap: 'max(10%, 20px)',
-      margin: 'max(20%, 20px) max(5%, 10px)',
+      margin: 'max(20%, 20px) max(2%, 10px)',
     }}>
 
       <Typography variant="h1" component="h1">
         {t('welcomeTitle')}
       </Typography>
-
 
       <Box sx={{
         display: 'flex',
