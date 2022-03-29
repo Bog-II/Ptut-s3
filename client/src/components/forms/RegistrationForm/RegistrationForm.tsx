@@ -45,7 +45,7 @@ export const RegistrationForm = () => {
     if (usernameValid && emailValid && passwordValid && arePasswordsEqual) {
       setIsLoading(true);
       try {
-        await signupUser(usernameValue, emailValue, passwordValue);
+        await signupUser(emailValue, usernameValue, passwordValue);
         setIsSnackBarMessageSuccess(true);
       } catch (error) {
         console.error(error);

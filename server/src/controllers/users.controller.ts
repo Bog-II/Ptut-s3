@@ -27,7 +27,6 @@ export const getAllUsers = (req: Request, res: Response) => {
 };
 
 export const createUser = async (req: Request, res: Response) => {
-
   const { username, password, email } = req.body;
 
   const userToVerify = { username: username, password: password, email: email };
@@ -37,6 +36,7 @@ export const createUser = async (req: Request, res: Response) => {
     return res.status(400).send('Email or Username already exists');
   }
 
+  console.log('passed');
 
   createUserDB(username, password, email, (err, user) => {
     if (err) {
