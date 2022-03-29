@@ -1,5 +1,6 @@
 import { Clear, Visibility, VisibilityOff } from '@mui/icons-material';
-import { Alert, Grid, IconButton, InputAdornment, Link, Snackbar, TextField } from '@mui/material'
+import { LoadingButton } from '@mui/lab';
+import { Alert, Button, Grid, IconButton, InputAdornment, Link, Snackbar, TextField } from '@mui/material'
 import { Box } from '@mui/system';
 import { FormEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -22,13 +23,12 @@ export const RegistrationForm = () => {
   const showConfirmPasswordClearIcon = confirmPasswordValue != '';
   const [showPasswords, setShowPasswords] = useState<boolean>(false);
 
+  const usernameValid = usernameValue != '';
   const passwordValid = (passwordValue == '') || (passwordValue.length >= 4);
   const emailValid = (emailValue == '') || isEmailValid(emailValue);
   const arePasswordsEqual = (confirmPasswordValue == '') || (passwordValue == confirmPasswordValue);
 
-  // Form errors
-  const [errors, setErrors] = useState<string[]>([]);
-  let showSnackBarErrors = errors.length > 0;
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLinkClick = () => {
     navigate('/authentification');
@@ -37,21 +37,11 @@ export const RegistrationForm = () => {
   const oneSubmitButtonClicked = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const errors: string[] = [];
+    if (usernameValid && emailValid && passwordValid && arePasswordsEqual) {
+      console.log('clicked');
 
-    if (confirmPasswordValue != passwordValue) {
-      errors.push(t('passwordsNotEqual'));
+      setIsLoading(true);
     }
-
-    if (errors.length === 0) {
-      // do api request
-      console.log(errors)
-    } else {
-      setErrors(errors);
-    }
-
-    console.log('clicked')
-    console.log(showSnackBarErrors)
   };
 
 
@@ -199,9 +189,16 @@ export const RegistrationForm = () => {
               </Grid>
             </Grid>
 
-            <FormButton>
+
+            <LoadingButton
+              variant="contained"
+              type="submit"
+              size="large"
+              loading={isLoading}
+              loadingPosition="end"
+            >
               {t("signUp")}
-            </FormButton>
+            </LoadingButton>
           </Grid>
         </Box>
 
