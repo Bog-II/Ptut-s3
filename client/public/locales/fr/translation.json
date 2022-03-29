@@ -39,9 +39,12 @@
   "signOut": "Se déconnecter",
   "password": "Mot de passe",
   "emailAdress": "Adresse email",
-  "userName": "Nom d'utilisateur",
+  "username": "Nom d'utilisateur",
   "alreadyHaveAnAccount": "Vous posséder déjà un compte ? Se connecter",
-  "donotHaveAnAccount": "Vous ne posséder pas encore de compte ? S'enregistrer",
+  "doNotHaveAnAccount": "Vous ne posséder pas encore de compte ? S'enregistrer",
   "confirmPassword": "Confirmer le mot de passe",
-  "userNameOrEmail": "Nom d'utilisateur ou email"
+  "usernameOrEmail": "Nom d'utilisateur ou email",
+  "passwordsNotEqual": "Les mots de passe ne sont pas identiques",
+  "passwordLengthMinimum": "Le mot de passe doit contenir au moins 4 caractères",
+  "emailInvalid": "L'adresse email est invalide"
 }

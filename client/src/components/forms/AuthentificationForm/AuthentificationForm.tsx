@@ -1,13 +1,25 @@
-import { Box, Grid } from '@mui/material'
-import React from 'react'
+import { Box, Grid, Link } from '@mui/material'
+import React, { FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { DoNotHaveAnAccount } from './DoNotHaveAnAccount'
-import { SubmitButton } from './SubmitButton'
+import { FormButton } from '../FormButton'
 import { IdTextField } from './TextFields/IdTextField'
 import { PasswordTextField } from './TextFields/PasswordTextField'
+import { useNavigate } from 'react-router-dom'
 
 export const AuthentificationForm = () => {
   const { t, i18n } = useTranslation();
+
+  const navigate = useNavigate();
+
+  const handleLinkClick = () => {
+    navigate('/registration');
+  }
+
+  const oneSubmitButtonClicked = (event: FormEvent) => {
+    event.preventDefault();
+    console.log('clicked')
+  };
 
   return (
     <>
@@ -22,7 +34,9 @@ export const AuthentificationForm = () => {
         }}
       >
         <h1>{t("signIn")}</h1>
-        <Box component="form" method="POST" action='/login' >
+        <Box component="form"
+          onSubmit={oneSubmitButtonClicked}
+        >
           <Grid container sx={{ rowGap: "1em" }}>
             <Grid item xs={12} >
               <IdTextField />
@@ -34,12 +48,16 @@ export const AuthentificationForm = () => {
 
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <DoNotHaveAnAccount />
+                <Link onClick={handleLinkClick}>
+                  {t('doNotHaveAnAccount')}
+                </Link>
               </Grid>
             </Grid>
           </Grid>
 
-          <SubmitButton />
+          <FormButton>
+            {t("signIn")}
+          </FormButton>
         </Box>
       </Box>
     </>

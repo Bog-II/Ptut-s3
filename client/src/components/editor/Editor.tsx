@@ -14,7 +14,6 @@ const Editor = () => {
   const [quill, setQuill] = useState<Quill>();
 
   const ThemeMode = useContext(ThemeModeContext);
-
   const prevThemeMode = ThemeMode.themeMode;
   ThemeMode.setThemeMode('light');
 

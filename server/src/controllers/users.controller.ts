@@ -12,7 +12,7 @@ import { RequestWithId } from '../verificators/jwt.verificators';
 import {
   isEmailValid,
   isPasswordValid,
-  isUserNameValid,
+  isUsernameValid,
   isUserValid,
 } from '../verificators/user.verificators';
 
@@ -27,9 +27,9 @@ export const getAllUsers = (req: Request, res: Response) => {
 };
 
 export const createUser = async (req: Request, res: Response) => {
-  const { userName, password, email } = req.body;
+  const { username, password, email } = req.body;
 
-  const userToVerify = { userName: userName, password: password, email: email };
+  const userToVerify = { username: username, password: password, email: email };
 
   const arePropertiesValid = await isUserValid(userToVerify);
   if (!arePropertiesValid) {
@@ -37,7 +37,7 @@ export const createUser = async (req: Request, res: Response) => {
   }
 
 
-  createUserDB(userName, password, email, (err, user) => {
+  createUserDB(username, password, email, (err, user) => {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -48,22 +48,22 @@ export const createUser = async (req: Request, res: Response) => {
 
 export const updateUser = (req: Request, res: Response) => {
   const userId = req.params.id;
-  const { userName, password, email } = req.body;
+  const { username, password, email } = req.body;
 
-  if (!isUserNameValid(userName)) {
+  if (!isUsernameValid(username)) {
     return res.status(400).send('Invalid UserName');
   }
 
-  if (!isPasswordValid(userName)) {
+  if (!isPasswordValid(username)) {
     return res.status(400).send('Invalid Password');
   }
 
-  if (!isEmailValid(userName)) {
+  if (!isEmailValid(username)) {
     return res.status(400).send('Invalid Email');
   }
 
   const userProperties = {
-    userName: userName,
+    username: username,
     password: password,
     email: email,
   };

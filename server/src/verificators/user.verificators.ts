@@ -1,17 +1,17 @@
 import User from '../schemas/User';
 
 interface User {
-  userName: string;
+  username: string;
   password: string;
   email: string;
 }
 
 export const isUserValid = async (user: User) => {
-  const { userName, password, email } = user;
+  const { username, password, email } = user;
   const emailExist = await isEmailExisting(email);
-  const userNameExist = await isUsernameExisting(userName);
+  const usernameExist = await isUsernameExisting(username);
   return (
-    !userNameExist &&
+    !usernameExist &&
     !emailExist &&
     isPasswordValid(password) &&
     isEmailValid(email)
@@ -23,13 +23,13 @@ export const isPasswordValid = (password: string) => {
   return true;
 };
 
-export const isUserNameValid = (useName: string) => {
+export const isUsernameValid = (useName: string) => {
   // To change
   return true;
 };
 
 export const isEmailValid = (email: string) => {
-  return email.includes('@') && email.includes('.');
+  return email.includes('@') && email.includes('.') && email.length > 5;
 };
 
 export const isUserIdExisting = async (userId: string) => {
@@ -42,7 +42,7 @@ export const isEmailExisting = async (email: string) => {
   return user !== null;
 };
 
-export const isUsernameExisting = async (userName: string) => {
-  const user = await User.findOne({ userName: userName });
+export const isUsernameExisting = async (username: string) => {
+  const user = await User.findOne({ username: username });
   return user !== null;
 };

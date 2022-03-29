@@ -18,7 +18,7 @@ export const IdTextField = () => {
     <TextField
       required
       fullWidth
-      label={t("userNameOrEmail")}
+      label={t("usernameOrEmail")}
       value={value}
       onChange={(e) => setValue(e.target.value)}
       color="primary"

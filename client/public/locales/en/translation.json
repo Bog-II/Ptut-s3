@@ -39,9 +39,12 @@
   "signOut": "Sign out",
   "password": "Password",
   "emailAdress": "Email address",
-  "userName": "User name",
+  "username": "User name",
   "alreadyHaveAnAccount": "Already have an account? Sign in",
-  "donotHaveAnAccount": "Don't have an account? Sign up",
+  "doNotHaveAnAccount": "Don't have an account? Sign up",
   "confirmPassword": "Confirm password",
-  "userNameOrEmail": "User name or email"
+  "usernameOrEmail": "User name or email",
+  "passwordsNotEqual": "Passwords are not equal",
+  "passwordLengthMinimum": "Password length must be at least 4 characters",
+  "emailInvalid": "Email is invalid"
 }
