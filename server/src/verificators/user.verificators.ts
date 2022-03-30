@@ -8,6 +8,10 @@ interface User {
 
 export const isUserValid = async (user: User) => {
   const { username, password, email } = user;
+  if (username == undefined || password == undefined || email == undefined) {
+    return false;
+  }
+
   const emailExist = await isEmailExisting(email);
   const usernameExist = await isUsernameExisting(username);
   return (
@@ -19,14 +23,23 @@ export const isUserValid = async (user: User) => {
 };
 
 export const isPasswordValid = (password: string) => {
+  if (password == undefined) {
+    return false;
+  }
   return password != '';
 };
 
 export const isUsernameValid = (username: string) => {
+  if (username == undefined) {
+    return false;
+  }
   return username != '';
 };
 
 export const isEmailValid = (email: string) => {
+  if (email == undefined) {
+    return false;
+  }
   return email.includes('@') && email.includes('.') && email.length > 5;
 };
 

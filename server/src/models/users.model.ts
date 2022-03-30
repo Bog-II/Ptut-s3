@@ -55,7 +55,7 @@ export const updateUserById = (
   userProperties: Object,
   callback: (err: Error | null) => void
 ) => {
-  User.findByIdAndUpdate(userId, userProperties, (errQuery) => {
+  User.findOneAndUpdate({ _id: userId }, userProperties, (errQuery) => {
     if (errQuery) {
       callback(errQuery);
     } else {
@@ -68,7 +68,7 @@ export const deleteUserById = (
   userId: string,
   callback: (err: Error | null) => void
 ) => {
-  User.findByIdAndRemove(userId, (err, user) => {
+  User.findOneAndDelete({ _id: userId }, (err, user) => {
     if (err) {
       callback(err);
     } else {

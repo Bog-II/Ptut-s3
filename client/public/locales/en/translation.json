@@ -57,5 +57,9 @@
   "deconnexion": "Deconnexion",
   "successfulDeconnexion": "Successfully deconnected",
   "unsuccessfulDeconnexion": "Unsuccessfully deconnected",
+  "successfulModification": "Successfully modified",
+  "unsuccessfulModification": "Unsuccessfully modified",
+  "successfulSuppression": "Successfully deleted",
+  "unsuccessfulSuppression": "Unsuccessfully deleted",
   "modify": "Modify"
 }

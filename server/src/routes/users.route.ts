@@ -2,21 +2,21 @@ import express from 'express';
 import { getDocumentsWithJWT } from '../controllers/document.controller';
 import {
   createUser,
-  deleteUser,
+  deleteMe,
   getAllUsers,
   getMyInfo,
-  updateUser,
+  updateMe,
 } from '../controllers/users.controller';
 const usersRouter = express.Router();
 
 usersRouter.get('/', getAllUsers);
-usersRouter.get('/me', getMyInfo)
+usersRouter.get('/me', getMyInfo);
 // usersRouter.get('/', authJWT, getUser);
 // usersRouter.get('/:id/avatar', getUserAvatar);
 usersRouter.post('/', createUser);
-usersRouter.put('/', updateUser);
+usersRouter.put('/me', updateMe);
 
-usersRouter.delete('/', deleteUser);
+usersRouter.delete('/me', deleteMe);
 usersRouter.get('/documents', getDocumentsWithJWT);
 
 export { usersRouter };

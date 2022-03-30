@@ -9,9 +9,15 @@ import { JWT_TOKEN } from '../verificators/jwt.verificators';
 export const loginUser = async (req: Request, res: Response) => {
   const { email, username, password } = req.body;
 
-  if (email == null && username == null) {
+  if (password == undefined) {
+    return res.status(400).send('Password is required');
+  }
+
+  if (email == undefined && username == undefined ) {
     return res.status(400).send('Email or Username is required');
   }
+
+
 
   let user;
   if (email != null) {

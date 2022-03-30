@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { deleteAccessTokenCookie, signUpUser } from '../../api/auth.api';
-import { getUserInformation } from '../../api/users.api';
+import { getUserInformation, updateUserInformation } from '../../api/users.api';
 import { AuthContext } from '../../contexts/AuthContext';
 import { isEmailValid } from '../../utils/Forms';
 import { ProfileLogOutButton } from './ProfileLogOutButton';
@@ -48,21 +48,20 @@ export const ProfileForm = () => {
   const [isModificationMessageSuccess, setIsModificationMessageSuccess] = useState(false);
   const [isDeletionMessageSuccess, setIsDeletionMessageSuccess] = useState<boolean>(false);
 
-  
-  const mofidicationAlertSnackBarSeverity = isModificationMessageSuccess ? 'success' : 'error';
+  const modificationAlertSnackBarSeverity = isModificationMessageSuccess ? 'success' : 'error';
   const deletionAlertSnackBarSeverity = isDeletionMessageSuccess ? 'success' : 'error';
 
-  const oneSubmitButtonClicked = async (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitButtonClicked = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (usernameValid && emailValid && passwordValid && arePasswordsEqual) {
       setIsModifyLoading(true);
       try {
-        // await signUpUser(emailValue, usernameValue, passwordValue);
-        // setIsDeconnexionMessageSuccess(true);
+        await updateUserInformation(emailValue, usernameValue);
+        setIsModificationMessageSuccess(true);
       } catch (error) {
         console.error(error);
-        // setIsDeconnexionMessageSuccess(false);
+        setIsModificationMessageSuccess(false);
       }
       setShowSnackbarModification(true);
       setIsModifyLoading(false);
@@ -84,7 +83,7 @@ export const ProfileForm = () => {
         <h1>{t("profile")}</h1>
         <Box
           component="form"
-          onSubmit={oneSubmitButtonClicked}
+          onSubmit={onSubmitButtonClicked}
         >
           <Grid container sx={{ rowGap: "1em" }}>
             <Grid item xs={12} >
@@ -238,9 +237,23 @@ export const ProfileForm = () => {
           </Grid>
         </Box>
 
+
+        <Snackbar
+          open={showSnackbarModification}
+          autoHideDuration={6000}
+          onClose={() => setShowSnackbarModification(false)}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "center"
+          }}>
+          <Alert severity={modificationAlertSnackBarSeverity}>
+            {isModificationMessageSuccess
+              ? t('successfulModification')
+              : t('unsuccessfulModification')}
+          </Alert>
+        </Snackbar>
       </Box>
 
-      
     </>
   )
 }

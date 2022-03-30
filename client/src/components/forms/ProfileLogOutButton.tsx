@@ -17,11 +17,10 @@ export const ProfileLogOutButton = () => {
   const deconnexionAlertSnackBarSeverity = isMessageSuccess ? 'success' : 'error';
 
   const handleLogOutClick = async () => {
-    setShowSnackbar(true);
-
     try {
       setIsLoading(true);
       await deleteAccessTokenCookie();
+
       setIsMessageSuccess(true);
       setTimeout(() => {
         authContext.setIsLogged(false);
@@ -30,9 +29,9 @@ export const ProfileLogOutButton = () => {
     } catch (error) {
       console.error(error);
       setIsMessageSuccess(false);
-      setIsLoading(false);
     }
 
+    setShowSnackbar(true);
     setIsLoading(false);
   }
 
