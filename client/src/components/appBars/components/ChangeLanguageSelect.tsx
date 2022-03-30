@@ -5,6 +5,7 @@ import {
   Select,
   SelectChangeEvent,
 } from '@mui/material';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const languagesKey: [string, string][] = [
@@ -20,6 +21,13 @@ export const ChangeLanguageSelect = () => {
   const handleChange = (event: SelectChangeEvent) => {
     i18n.changeLanguage(event.target.value);
   };
+
+  useEffect(() => {
+    const language = i18n.language;
+    if (language.length > 2) {
+      i18n.changeLanguage(language.slice(0, 2));
+    }
+  }, []);
 
   return (
     <>
