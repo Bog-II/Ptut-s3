@@ -1,6 +1,6 @@
 import { CookieOptions, Request, Response } from 'express';
 import User from '../schemas/User';
-import { comparePasswords, getHashedPassword } from '../utils/password.util';
+import { comparePasswords } from '../utils/password.util';
 
 import jwt from 'jsonwebtoken';
 import { isUserIdExisting } from '../verificators/user.verificators';
@@ -68,4 +68,9 @@ export const retrieveUserData = (req: Request, res: Response) => {
   } catch (err) {
     res.status(400).send('Invalid token.');
   }
+};
+
+export const logoutUser = (req: Request, res: Response) => {
+  res.clearCookie('access_token');
+  res.status(200).send({ success: true });
 };

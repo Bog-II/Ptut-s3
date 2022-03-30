@@ -80,3 +80,18 @@ export const isUserLoggedIn = async () => {
 
   throw new Error('Error while checking if user is logged in');
 };
+
+export const deleteAccessTokenCookie = async () => {
+  const response = await fetch('/api/auth/logout', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (response.ok) {
+    return;
+  }
+
+  throw new Error('Error while logging out user');
+};

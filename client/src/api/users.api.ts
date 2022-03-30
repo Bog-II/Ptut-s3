@@ -13,3 +13,4 @@ export const getUserInformation = async () => {
 
   throw new Error('Error while getting user information');
 };
+
