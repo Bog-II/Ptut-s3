@@ -5,6 +5,7 @@ import './Editor.css';
 import { io, Socket } from 'socket.io-client';
 import { useParams } from 'react-router';
 import { ThemeModeContext } from '../../contexts/ThemeModeContext';
+import { EditorAppBar } from '../appBars/EditorAppBar';
 
 const saveInterval = 2000;
 
@@ -12,6 +13,14 @@ const Editor = () => {
   const { id: docId } = useParams<string>();
   const [socket, setSocket] = useState<Socket>();
   const [quill, setQuill] = useState<Quill>();
+
+  const [documentName, setDocumentName] = useState<string>('');
+
+  useEffect(() => {
+    document.title = documentName;
+  
+  }, [documentName])
+  
 
   const ThemeMode = useContext(ThemeModeContext);
   const prevThemeMode = ThemeMode.themeMode;
@@ -47,7 +56,7 @@ const Editor = () => {
     if (socket == null || quill == null) return;
 
     socket.once('load-document', (content, documentName) => {
-      document.title = documentName;
+      setDocumentName(documentName);
       quill.setContents(content);
       quill.enable();
     });
@@ -142,7 +151,11 @@ const Editor = () => {
   }, []);
 
   return (
-    <div className="container" ref={wrapperRef}></div>
+    <>
+      <EditorAppBar documentName={documentName}/>
+      <div className="container" ref={wrapperRef}></div>
+    </>
+
   );
 };
 

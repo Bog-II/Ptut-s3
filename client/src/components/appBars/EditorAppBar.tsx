@@ -7,7 +7,11 @@ import { EditorShareButton } from './components/EditorShareButton'
 import { LogoButton } from './components/LogoButton'
 import { ProfileButton } from './components/ProfileButton'
 
-export const EditorAppBar = () => {
+interface EditorAppBarProps {
+  documentName: string
+}
+
+export const EditorAppBar = ({ documentName }: EditorAppBarProps) => {
   return (
     <AppBar position="static" color="inherit">
       <Toolbar
@@ -16,7 +20,7 @@ export const EditorAppBar = () => {
       >
         <Box sx={{ display: 'flex', columnGap: 2, alignItems: 'center' }}>
           <LogoButton />
-          <DocumentNameTextField pDocumentName='test' />
+          <DocumentNameTextField pDocumentName={documentName} />
         </Box>
 
         <Box sx={{ display: 'flex', columnGap: 2, alignItems: 'center' }}>

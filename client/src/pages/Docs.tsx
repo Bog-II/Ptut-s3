@@ -13,10 +13,7 @@ const Docs = () => {
   }
 
   return (
-    <>
-      <EditorAppBar />
-      <Editor />
-    </>
+    <Editor />
   );
 };
 
