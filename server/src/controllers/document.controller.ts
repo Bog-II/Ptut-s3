@@ -5,7 +5,7 @@ import {
   getAllDocumentsFromDB,
   getDocumentsByUserId,
 } from '../models/document.model';
-import { JWT_TOKEN, RequestWithId } from '../verificators/jwt.verificators';
+import { JWT_TOKEN, RequestWithUserId } from '../verificators/jwt.verificators';
 import { isUserIdExisting } from '../verificators/user.verificators';
 
 export const getAllDocuments = (req: Request, res: Response) => {
@@ -18,9 +18,9 @@ export const getAllDocuments = (req: Request, res: Response) => {
   });
 };
 
-export const createDocument = async (req: RequestWithId, res: Response) => {
+export const createDocument = async (req: RequestWithUserId, res: Response) => {
   const { documentName } = req.body;
-  const userId = req.id;
+  const {userId} = req;
 
   createDocumentInDB(documentName, userId, (err, documentId) => {
     if (err) {
@@ -35,10 +35,10 @@ export const createDocument = async (req: RequestWithId, res: Response) => {
 };
 
 export const getDocumentsWithJWT = async (
-  req: RequestWithId,
+  req: RequestWithUserId,
   res: Response
 ) => {
-  getDocumentsByUserId(req.id, (err, documents) => {
+  getDocumentsByUserId(req.userId, (err, documents) => {
     if (err) {
       res.status(500).send(err);
     } else {

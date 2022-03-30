@@ -6,11 +6,15 @@ export type JWT_TOKEN = {
   _id: string;
 };
 
-export interface RequestWithId extends Request {
-  id: string;
+export interface RequestWithUserId extends Request {
+  userId: string;
 }
 
-export const authJWT = (req: Request, res: Response, next: NextFunction) => {
+export const authJWT = (
+  req: RequestWithUserId,
+  res: Response,
+  next: NextFunction
+) => {
   const jwt_token = <string>req.cookies['access_token'];
 
   if (!jwt_token) {
@@ -27,7 +31,8 @@ export const authJWT = (req: Request, res: Response, next: NextFunction) => {
       return res.status(400).send('Invalid jwt token.');
     }
 
-    req.params.id = id;
+    req.userId = id;
+    console.log('jwt verificator', req.params);
     next();
   } catch (err) {
     res.status(400).send('Invalid token.');

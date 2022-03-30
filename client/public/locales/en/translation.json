@@ -51,5 +51,9 @@
   "signUpError": "Error signing up",
   "signInSuccess": "Successfully signed in",
   "signInError": "Error signing in",
-  "welcomeTitle": "Welcome to OpenDocs"
+  "welcomeTitle": "Welcome to OpenDocs",
+
+  "deleteAccount": "Delete account",
+  "deconnexion": "Deconnexion",
+  "modify": "Modify"
 }

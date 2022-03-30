@@ -4,12 +4,13 @@ import {
   createUser,
   deleteUser,
   getAllUsers,
+  getMyInfo,
   updateUser,
 } from '../controllers/users.controller';
-import { authJWT } from '../verificators/jwt.verificators';
 const usersRouter = express.Router();
 
 usersRouter.get('/', getAllUsers);
+usersRouter.get('/me', getMyInfo)
 // usersRouter.get('/', authJWT, getUser);
 // usersRouter.get('/:id/avatar', getUserAvatar);
 usersRouter.post('/', createUser);

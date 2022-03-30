@@ -7,7 +7,7 @@ import {
   getUserById,
   updateUserById,
 } from '../models/users.model';
-import { RequestWithId } from '../verificators/jwt.verificators';
+import { RequestWithUserId } from '../verificators/jwt.verificators';
 
 import {
   isEmailValid,
@@ -76,12 +76,26 @@ export const updateUser = (req: Request, res: Response) => {
   });
 };
 
-export const deleteUser = (req: RequestWithId, res: Response) => {
-  deleteUserById(req.id, (err) => {
+export const deleteUser = (req: RequestWithUserId, res: Response) => {
+  deleteUserById(req.userId, (err) => {
     if (err) {
       res.status(500).send(err);
     } else {
       res.status(200).send('User successfully deleted');
+    }
+  });
+};
+
+export const getMyInfo = (req: RequestWithUserId, res: Response) => {
+  const id = req.userId;
+  console.log('getMyInfo', id);
+
+  getUserById(id, (err, user) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      console.log(user);
+      res.status(200).send(user);
     }
   });
 };

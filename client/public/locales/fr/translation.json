@@ -51,5 +51,9 @@
   "signUpError": "La création de compte a échoué",
   "signInSuccess": "La connexion a réussi",
   "signInError": "La connexion a échoué",
-  "welcomeTitle": "Bienvenue sur OpenDocs"
+  "welcomeTitle": "Bienvenue sur OpenDocs",
+
+  "deleteAccount": "Supprimer le compte",
+  "deconnexion": "Se déconnecter",
+  "modify": "Modifier"
 }
