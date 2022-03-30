@@ -2,15 +2,18 @@ import { Clear, Visibility, VisibilityOff } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
 import { Alert, Grid, IconButton, InputAdornment, Link, Snackbar, TextField } from '@mui/material'
 import { Box } from '@mui/system';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { signUpUser } from '../../api/auth.api';
+import { deleteAccessTokenCookie, signUpUser } from '../../api/auth.api';
 import { getUserInformation } from '../../api/users.api';
+import { AuthContext } from '../../contexts/AuthContext';
 import { isEmailValid } from '../../utils/Forms';
 
 export const ProfileForm = () => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  const authContext = useContext(AuthContext);
 
   // Form fields
   const [usernameValue, setUsernameValue] = useState<string>('');
@@ -38,11 +41,32 @@ export const ProfileForm = () => {
   const arePasswordsEqual = (confirmPasswordValue == '') || (passwordValue == confirmPasswordValue);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLogOutLoading, setIsLogOutLoading] = useState<boolean>(false);
 
   // Snackbar
   const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
+  const [showSnackbarDeconnexion, setShowSnackbarDeconnexion] = useState<boolean>(false);
   const [isSnackBarMessageSuccess, setIsSnackBarMessageSuccess] = useState<boolean>(false);
   const alertSnackBarSeverity = isSnackBarMessageSuccess ? 'success' : 'error';
+
+  const handleLogOutClick = async () => {
+    try {
+      setIsLogOutLoading(true);
+      await deleteAccessTokenCookie();
+
+      setShowSnackbarDeconnexion(true);
+      setIsLogOutLoading(false);
+
+      setTimeout(() => {
+        authContext.setIsLogged(false);
+        navigate('/');
+      }, 1000);
+    } catch (error) {
+      console.error(error);
+    }
+
+
+  }
 
   const oneSubmitButtonClicked = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -220,7 +244,8 @@ export const ProfileForm = () => {
                 type="submit"
                 size="small"
                 color="error"
-                loading={isLoading}
+                loading={isLogOutLoading}
+                onClick={handleLogOutClick}
               >
                 {t("deconnexion")}
               </LoadingButton>
@@ -243,15 +268,15 @@ export const ProfileForm = () => {
       </Box>
 
       <Snackbar
-        open={showSnackbar}
+        open={showSnackbarDeconnexion}
         autoHideDuration={6000}
         onClose={() => setShowSnackbar(false)}
         anchorOrigin={{
           vertical: "top",
           horizontal: "center"
         }}>
-        <Alert severity={alertSnackBarSeverity}>
-          {isSnackBarMessageSuccess ? t('signUpSuccess') : t('signUpError')}
+        <Alert severity="success">
+          {t('successfulDeconnexion')}
         </Alert>
       </Snackbar>
     </>
