@@ -56,5 +56,6 @@
   "deleteAccount": "Delete account",
   "deconnexion": "Deconnexion",
   "successfulDeconnexion": "Successfully deconnected",
+  "unsuccessfulDeconnexion": "Unsuccessfully deconnected",
   "modify": "Modify"
 }

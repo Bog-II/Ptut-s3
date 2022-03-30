@@ -23,7 +23,6 @@ export const authJWT = (
 
   try {
     const verified = jwt.verify(jwt_token, process.env.JWT_SECRET_TOKEN);
-    console.log(verified);
 
     const id: string = (<JWT_TOKEN>verified)._id;
 
@@ -32,7 +31,6 @@ export const authJWT = (
     }
 
     req.userId = id;
-    console.log('jwt verificator', req.params);
     next();
   } catch (err) {
     res.status(400).send('Invalid token.');

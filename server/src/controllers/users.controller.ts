@@ -88,8 +88,6 @@ export const deleteUser = (req: RequestWithUserId, res: Response) => {
 
 export const getMyInfo = (req: RequestWithUserId, res: Response) => {
   const id = req.userId;
-  console.log('getMyInfo', id);
-
   getUserById(id, (err, user) => {
     if (err) {
       res.status(500).send(err);

@@ -9,11 +9,10 @@ import { deleteAccessTokenCookie, signUpUser } from '../../api/auth.api';
 import { getUserInformation } from '../../api/users.api';
 import { AuthContext } from '../../contexts/AuthContext';
 import { isEmailValid } from '../../utils/Forms';
+import { ProfileLogOutButton } from './ProfileLogOutButton';
 
 export const ProfileForm = () => {
   const { t, i18n } = useTranslation();
-  const navigate = useNavigate();
-  const authContext = useContext(AuthContext);
 
   // Form fields
   const [usernameValue, setUsernameValue] = useState<string>('');
@@ -34,54 +33,39 @@ export const ProfileForm = () => {
     })();
   }, [])
 
-
   const usernameValid = usernameValue != '';
   const passwordValid = (passwordValue == '') || (passwordValue.length >= 4);
   const emailValid = (emailValue == '') || isEmailValid(emailValue);
   const arePasswordsEqual = (confirmPasswordValue == '') || (passwordValue == confirmPasswordValue);
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isLogOutLoading, setIsLogOutLoading] = useState<boolean>(false);
+  const [isModifyLoading, setIsModifyLoading] = useState<boolean>(false);
+  const [isDeleteLoading, setIsDeleteLoading] = useState<boolean>(false);
 
-  // Snackbar
-  const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
-  const [showSnackbarDeconnexion, setShowSnackbarDeconnexion] = useState<boolean>(false);
-  const [isSnackBarMessageSuccess, setIsSnackBarMessageSuccess] = useState<boolean>(false);
-  const alertSnackBarSeverity = isSnackBarMessageSuccess ? 'success' : 'error';
+  // Snackbars
+  const [showSnackbarModification, setShowSnackbarModification] = useState<boolean>(false);
+  const [showSnackbarDeletion, setShowSnackbarDeletion] = useState<boolean>(false);
 
-  const handleLogOutClick = async () => {
-    try {
-      setIsLogOutLoading(true);
-      await deleteAccessTokenCookie();
+  const [isModificationMessageSuccess, setIsModificationMessageSuccess] = useState(false);
+  const [isDeletionMessageSuccess, setIsDeletionMessageSuccess] = useState<boolean>(false);
 
-      setShowSnackbarDeconnexion(true);
-      setIsLogOutLoading(false);
-
-      setTimeout(() => {
-        authContext.setIsLogged(false);
-        navigate('/');
-      }, 1000);
-    } catch (error) {
-      console.error(error);
-    }
-
-
-  }
+  
+  const mofidicationAlertSnackBarSeverity = isModificationMessageSuccess ? 'success' : 'error';
+  const deletionAlertSnackBarSeverity = isDeletionMessageSuccess ? 'success' : 'error';
 
   const oneSubmitButtonClicked = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (usernameValid && emailValid && passwordValid && arePasswordsEqual) {
-      setIsLoading(true);
+      setIsModifyLoading(true);
       try {
-        await signUpUser(emailValue, usernameValue, passwordValue);
-        setIsSnackBarMessageSuccess(true);
+        // await signUpUser(emailValue, usernameValue, passwordValue);
+        // setIsDeconnexionMessageSuccess(true);
       } catch (error) {
         console.error(error);
-        setIsSnackBarMessageSuccess(false);
+        // setIsDeconnexionMessageSuccess(false);
       }
-      setShowSnackbar(true);
-      setIsLoading(false);
+      setShowSnackbarModification(true);
+      setIsModifyLoading(false);
     }
   };
 
@@ -221,13 +205,12 @@ export const ProfileForm = () => {
               />
             </Grid>
 
-
             <Grid item xs={6}>
               <LoadingButton
                 variant="contained"
                 type="submit"
                 size="large"
-                loading={isLoading}
+                loading={isModifyLoading}
               >
                 {t("modify")}
               </LoadingButton>
@@ -239,46 +222,25 @@ export const ProfileForm = () => {
               alignItem: "center",
               justifyContent: 'flex-end',
             }}>
-              <LoadingButton
-                variant="outlined"
-                type="submit"
-                size="small"
-                color="error"
-                loading={isLogOutLoading}
-                onClick={handleLogOutClick}
-              >
-                {t("deconnexion")}
-              </LoadingButton>
+
+              <ProfileLogOutButton />
 
               <LoadingButton
                 variant="contained"
                 type="submit"
                 size="small"
                 color="error"
-                loading={isLoading}
+                loading={isDeleteLoading}
               >
                 {t("deleteAccount")}
               </LoadingButton>
             </Grid>
-
           </Grid>
-
         </Box>
 
       </Box>
 
-      <Snackbar
-        open={showSnackbarDeconnexion}
-        autoHideDuration={6000}
-        onClose={() => setShowSnackbar(false)}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "center"
-        }}>
-        <Alert severity="success">
-          {t('successfulDeconnexion')}
-        </Alert>
-      </Snackbar>
+      
     </>
   )
 }
