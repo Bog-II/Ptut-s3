@@ -47,6 +47,7 @@ export const AuthentificationForm = () => {
       authContext.setIsLogged(true);
 
       navigate('/');
+      return;
     } catch (error) {
       console.error(error);
       setIsSnackBarMessageSuccess(false);

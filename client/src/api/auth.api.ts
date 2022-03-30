@@ -65,3 +65,18 @@ export const signInUserWithUsername = async (
 
   throw new Error('Error while signing in user');
 };
+
+export const isUserLoggedIn = async () => {
+  const response = await fetch('/api/auth/', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (response.ok) {
+    return;
+  }
+
+  throw new Error('Error while checking if user is logged in');
+};

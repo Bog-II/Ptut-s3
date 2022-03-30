@@ -12,12 +12,8 @@ export interface RequestWithId extends Request {
 
 export const authJWT = (req: Request, res: Response, next: NextFunction) => {
   const jwt_token = <string>req.cookies['access_token'];
-  console.log(jwt_token);
-  if (!jwt_token) {
-    return res.status(401).send('Unauthorized');
-  }
 
-  if (jwt_token === undefined) {
+  if (!jwt_token) {
     return res.status(401).send('Access denied. No jwt token provided.');
   }
 

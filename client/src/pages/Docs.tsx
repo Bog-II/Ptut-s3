@@ -7,9 +7,7 @@ import './Docs.css';
 
 const Docs = () => {
   const authContext = useContext(AuthContext);
-
-  console.log(authContext);
-
+  console.log(authContext.isLogged);
   if (!authContext.isLogged) {
     return <Navigate to='/' />
   }

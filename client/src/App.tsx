@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -14,21 +14,46 @@ import { CssBaseline, PaletteMode, ThemeProvider } from '@mui/material';
 import { darkTheme, getLocalThemeMode, lightTheme, setLocalThemeMode, ThemeModeContext } from './contexts/ThemeModeContext';
 import { Profile } from './pages/Profile';
 import { AuthContext } from './contexts/AuthContext';
+import { isUserLoggedIn } from './api/auth.api';
 
 export default function App() {
+  // Logged
+  const [isLogged, setIsLogged] = useState<boolean>(true);
+
   // Mode
   const defaultThemeMode = getLocalThemeMode();
   const [mode, setMode] = useState<PaletteMode>(defaultThemeMode);
   const theme = mode === 'dark' ? darkTheme : lightTheme;
 
-  // Logged
-  const [isLogged, setIsLogged] = useState<boolean>(false);
-  
-
   const setThemeMode = (mode: PaletteMode) => {
     setMode(mode)
     setLocalThemeMode(mode);
   }
+
+  useEffect(() => {
+    (async () => {
+      try {
+        await isUserLoggedIn();
+        setIsLogged(true);
+      } catch (error) {
+        console.error(error);
+        setIsLogged(false);
+      }
+    })()
+  }, []);
+
+  useEffect(() => {
+    if (isLogged) {
+      (async () => {
+        try {
+          await isUserLoggedIn();
+        } catch (error) {
+          console.error(error);
+          setIsLogged(false);
+        }
+      })()
+    }
+  }, [isLogged]);
 
   return (
 
