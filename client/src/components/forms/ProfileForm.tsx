@@ -2,15 +2,15 @@ import { Clear, Visibility, VisibilityOff } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
 import { Alert, Grid, IconButton, InputAdornment, Link, Snackbar, TextField } from '@mui/material'
 import { Box } from '@mui/system';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { signUpUser } from '../../api/auth.api';
+import { getUserInformation } from '../../api/users.api';
 import { isEmailValid } from '../../utils/Forms';
 
 export const ProfileForm = () => {
   const { t, i18n } = useTranslation();
-  const navigate = useNavigate();
 
   // Form fields
   const [usernameValue, setUsernameValue] = useState<string>('');
@@ -22,6 +22,15 @@ export const ProfileForm = () => {
   const showPasswordClearIcon = passwordValue != '';
   const showConfirmPasswordClearIcon = confirmPasswordValue != '';
   const [showPasswords, setShowPasswords] = useState<boolean>(false);
+
+  useEffect(() => {
+    (async () => {
+      const me = await getUserInformation()
+      setUsernameValue(me.username);
+      setEmailValue(me.email);
+    })();
+  }, [])
+
 
   const usernameValid = usernameValue != '';
   const passwordValid = (passwordValue == '') || (passwordValue.length >= 4);
