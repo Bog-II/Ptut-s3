@@ -25,6 +25,9 @@ export const DocumentsDataGrid = () => {
   const { t, i18n } = useTranslation();
 
   const [searchBarValue, setSearchBarValue] = useState<string>('');
+  const [documents, setDocuments] = useState<DocumentInterface[]>([]);
+
+
   const [fileredDocuments, setFileredDocuments] = useState<DocumentInterface[]>(
     [...documentsData]
   );

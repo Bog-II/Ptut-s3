@@ -1,5 +1,5 @@
 interface DocumentInterface {
-  id: number;
+  id: string;
   documentName: string;
   documentCreatorId: number;
   creationDate: Date;

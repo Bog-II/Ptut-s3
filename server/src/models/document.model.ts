@@ -22,7 +22,8 @@ export const createDocumentInDB = (
     _id: uuidv4(),
     data: {},
     documentName: documentName,
-    users: [{ userId: userId, role: 1 }],
+    // users: [{ userId: userId, role: 1 }],
+    documentOwnerId: userId,
     creationDate: Date.now(),
     lastModificationDate: Date.now(),
   };
@@ -40,14 +41,11 @@ export const getDocumentsByUserId = (
   userId: string,
   callback: (err: Error | null, res: Object[]) => void
 ) => {
-  Document.find(
-    { users: { $elemMatch: { userId: userId } } },
-    (errQuery, documents) => {
-      if (errQuery) {
-        callback(errQuery, []);
-      } else {
-        callback(null, documents);
-      }
+  Document.find({ documentOwnerId: userId }, (errQuery, documents) => {
+    if (errQuery) {
+      callback(errQuery, []);
+    } else {
+      callback(null, documents);
     }
-  );
+  });
 };

@@ -1,12 +1,10 @@
 import { Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
 import {
   createDocumentInDB,
   getAllDocumentsFromDB,
   getDocumentsByUserId,
 } from '../models/document.model';
-import { JWT_TOKEN, RequestWithUserId } from '../verificators/jwt.verificators';
-import { isUserIdExisting } from '../verificators/user.verificators';
+import { RequestWithUserId } from '../verificators/jwt.verificators';
 
 export const getAllDocuments = (req: Request, res: Response) => {
   getAllDocumentsFromDB((err, documents) => {
@@ -18,9 +16,9 @@ export const getAllDocuments = (req: Request, res: Response) => {
   });
 };
 
-export const createDocument = async (req: RequestWithUserId, res: Response) => {
+export const createDocument = (req: RequestWithUserId, res: Response) => {
   const { documentName } = req.body;
-  const {userId} = req;
+  const { userId } = req;
 
   createDocumentInDB(documentName, userId, (err, documentId) => {
     if (err) {
@@ -34,10 +32,18 @@ export const createDocument = async (req: RequestWithUserId, res: Response) => {
   });
 };
 
-export const getDocumentsWithJWT = async (
-  req: RequestWithUserId,
-  res: Response
-) => {
+export const getUserDocuments = (req: RequestWithUserId, res: Response) => {
+  const { userId } = req;
+  getDocumentsByUserId(userId, (err, documents) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(documents);
+    }
+  });
+};
+
+export const getDocumentsWithJWT = (req: RequestWithUserId, res: Response) => {
   getDocumentsByUserId(req.userId, (err, documents) => {
     if (err) {
       res.status(500).send(err);

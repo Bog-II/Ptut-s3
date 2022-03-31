@@ -1,12 +1,14 @@
 import { Add } from '@mui/icons-material';
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material'
-import React, { useState } from 'react'
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { createNewDocument } from '../../api/documents.api';
 
 export const CreateNewDocumentButton = () => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+  const [dialogTexteFieldValue, setDialogTexteFieldValue] = useState('');
 
   const [showDialog, setShowDialog] = useState(false);
 
@@ -16,12 +18,15 @@ export const CreateNewDocumentButton = () => {
 
   const handleClose = () => {
     setShowDialog(false);
+    setDialogTexteFieldValue('');
   }
 
-  const handleCreate = () => {
-    navigate('/registration');
+  const handleCreate = async () => {
+    const documentName = dialogTexteFieldValue;
+    const document = await createNewDocument(documentName);
     handleClose();
   }
+
   return (
     <>
       <Button
@@ -40,6 +45,8 @@ export const CreateNewDocumentButton = () => {
         <DialogContent>
           <TextField
             autoFocus
+            value={dialogTexteFieldValue}
+            onChange={(e) => setDialogTexteFieldValue(e.target.value)}
             margin="dense"
             id="name"
             label={t('documentName')}

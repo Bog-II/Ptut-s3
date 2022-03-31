@@ -29,29 +29,30 @@ export const getAllUsers = (req: Request, res: Response) => {
   });
 };
 
-export const createUser = async (req: Request, res: Response) => {
+export const createUser = (req: Request, res: Response) => {
   const { username, password, email } = req.body;
 
   const userToVerify = { username: username, password: password, email: email };
 
-  const arePropertiesValid = await isUserValid(userToVerify);
-  if (!arePropertiesValid) {
-    return res.status(400).send('Email or Username already exists');
-  }
-
-  createUserDB(username, password, email, (err, user) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.status(201).send(user);
+  const promiseUserValid = isUserValid(userToVerify);
+  promiseUserValid.then((userValid) => {
+    if (!userValid) {
+      return res.status(400).send('Email or Username already exists');
     }
+
+    createUserDB(username, password, email, (err, user) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.status(201).send(user);
+      }
+    });
   });
 };
 
 export const updateMe = (req: RequestWithUserId, res: Response) => {
   const id = req.userId;
   const { username, email } = req.body;
-  console.log(username, email);
 
   if (!isUsernameValid(username)) {
     return res.status(400).send('Invalid UserName');
@@ -91,7 +92,6 @@ export const updateMe = (req: RequestWithUserId, res: Response) => {
 
 export const deleteMe = (req: RequestWithUserId, res: Response) => {
   const id = req.userId;
-  console.log(id);
   deleteUserById(id, (err) => {
     if (err) {
       res.status(500).send(err);
