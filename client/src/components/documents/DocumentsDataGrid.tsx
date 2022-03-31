@@ -79,7 +79,7 @@ export const DocumentsDataGrid = () => {
 
       setDocuments(processedDocuments);
 
-      setTimeout(() => setIsLoading(false), 700);
+      setTimeout(() => setIsLoading(false), 1600);
       
     };
     (async () => {
