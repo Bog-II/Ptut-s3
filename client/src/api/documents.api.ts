@@ -1,18 +1,18 @@
-// export const getUserDocuments = async () => {
-//   const response = await fetch('/api/documents', {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   });
+export const getUserDocuments = async () => {
+  const response = await fetch('/api/documents/me', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 
-//   if (response.ok) {
-//     const json = await response.json();
-//     return json;
-//   }
+  if (response.ok) {
+    const json = await response.json();
+    return json;
+  }
 
-//   throw new Error('Error while getting user documents');
-// };
+  throw new Error('Error while getting user documents');
+};
 
 export const createNewDocument = async (documentName: string) => {
   const response = await fetch('/api/documents', {

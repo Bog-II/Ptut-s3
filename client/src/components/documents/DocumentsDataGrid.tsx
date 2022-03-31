@@ -13,6 +13,7 @@ import {
 import React, { SyntheticEvent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { getUserDocuments } from '../../api/documents.api';
 import { DocumentsDataGridContext } from '../../contexts/DocumentDataGridContext';
 import { documentsData } from '../../data/documentsDataGrid';
 import { DocumentInterface } from '../../interfaces/DocumentInterface';
@@ -26,11 +27,79 @@ export const DocumentsDataGrid = () => {
 
   const [searchBarValue, setSearchBarValue] = useState<string>('');
   const [documents, setDocuments] = useState<DocumentInterface[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const filterDocumentsFunction = () => {
+    const filteredDocuments = documents.filter((document) => {
+      const line = document.documentCreatorId.toLowerCase() +
+        document.documentName.toLowerCase() +
+        getDateString(document.creationDate).toLowerCase() +
+        getTimeString(document.lastModificationTime).toLowerCase() +
+        getSizeString(document.documentSize).toLowerCase();
+
+      return line.includes(searchBarValue.toLowerCase());
+    });
+    setFileredDocuments(filteredDocuments);
+  }
+
+  useEffect(() => {
+    if (searchBarValue == '') {
+      setFileredDocuments([...documents]);
+    } else {
+      const delayFilterDocuments = setTimeout(() => {
+        filterDocumentsFunction();
+      }, 600);
+
+      return () => clearTimeout(delayFilterDocuments);
+    }
+  }, [searchBarValue]);
+
+  useEffect(() => {
+    filterDocumentsFunction();
+  }, [documents]);
+
+  useEffect(() => {
+    const fonctionLoad = async () => {
+      setIsLoading(true);
+      const rowDocuments = await getUserDocuments();
+
+      const processedDocuments: DocumentInterface[] = [];
+
+      for (const { _id, documentName, creationDate, lastModificationDate } of rowDocuments) {
+        const processedDocument: DocumentInterface = {
+          id: _id,
+          documentName: documentName,
+          documentCreatorId: '4512',
+          creationDate: new Date(creationDate),
+          lastModificationTime: new Date(lastModificationDate),
+          documentSize: Math.floor(Math.random() * 2000),
+        }
+        processedDocuments.push(processedDocument);
+      }
+
+      setDocuments(processedDocuments);
+      setIsLoading(false);
+    };
+    (async () => {
+      await fonctionLoad();
+    })()
+
+
+    const interval = setInterval(async () => {
+      await fonctionLoad();
+    }, 15000);
+
+    return () => {
+      clearInterval(interval);
+    }
+  }, [])
 
 
   const [fileredDocuments, setFileredDocuments] = useState<DocumentInterface[]>(
-    [...documentsData]
+    [...documents]
   );
+
+
 
   // Delete Snackbar - Start
   const [openSnackBar, setOpenSnackBar] = useState(false);
@@ -231,26 +300,7 @@ export const DocumentsDataGrid = () => {
     DocumentsDataGridActions,
   ];
 
-  useEffect(() => {
-    if (searchBarValue == '') {
-      setFileredDocuments([...documentsData]);
-    } else {
-      const delayFilterDocuments = setTimeout(() => {
-        const filteredDocuments = documentsData.filter((document) => {
-          const line =
-            document.documentName.toLowerCase() +
-            getDateString(document.creationDate).toLowerCase() +
-            getTimeString(document.lastModificationTime).toLowerCase() +
-            getSizeString(document.documentSize).toLowerCase();
 
-          return line.includes(searchBarValue.toLowerCase());
-        });
-        setFileredDocuments(filteredDocuments);
-      }, 600);
-
-      return () => clearTimeout(delayFilterDocuments);
-    }
-  }, [searchBarValue]);
 
   const handleRowClick = (
     params: GridRowParams,
@@ -299,7 +349,7 @@ export const DocumentsDataGrid = () => {
           disableColumnPinning
           disableColumnMenu
           disableColumnResize
-          loading={false}
+          loading={isLoading}
           onRowClick={handleRowClick}
           hideFooter
           density="standard"

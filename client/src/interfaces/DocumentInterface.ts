@@ -1,7 +1,7 @@
 interface DocumentInterface {
   id: string;
   documentName: string;
-  documentCreatorId: number;
+  documentCreatorId: string;
   creationDate: Date;
   lastModificationTime: Date;
   documentSize: number;

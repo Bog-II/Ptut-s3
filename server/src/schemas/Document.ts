@@ -8,7 +8,6 @@ const Document = new Schema({
     required: true,
   },
   documentName: { type: String, required: true },
-  documentOwnerId: { type: String, required: true },
   users: {
     type: [
       {

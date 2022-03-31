@@ -23,7 +23,7 @@ export const createDocumentInDB = (
     data: {},
     documentName: documentName,
     // users: [{ userId: userId, role: 1 }],
-    documentOwnerId: userId,
+    // documentOwnerId: userId,
     creationDate: Date.now(),
     lastModificationDate: Date.now(),
   };

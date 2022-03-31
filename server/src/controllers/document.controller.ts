@@ -21,6 +21,7 @@ export const createDocument = (req: RequestWithUserId, res: Response) => {
   const { userId } = req;
 
   createDocumentInDB(documentName, userId, (err, documentId) => {
+    console.log(err)
     if (err) {
       res.status(500).send(err);
     } else {

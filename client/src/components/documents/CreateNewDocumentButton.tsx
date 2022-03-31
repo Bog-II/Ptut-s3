@@ -22,9 +22,12 @@ export const CreateNewDocumentButton = () => {
   }
 
   const handleCreate = async () => {
+    console.log('handleCreate')
+    handleClose();
     const documentName = dialogTexteFieldValue;
     const document = await createNewDocument(documentName);
-    handleClose();
+    console.log(document);
+
   }
 
   return (
