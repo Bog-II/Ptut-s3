@@ -9,6 +9,7 @@ import { deleteAccessTokenCookie, signUpUser } from '../../api/auth.api';
 import { getUserInformation, updateUserInformation } from '../../api/users.api';
 import { AuthContext } from '../../contexts/AuthContext';
 import { isEmailValid } from '../../utils/Forms';
+import { ProfileDeleteButton } from './ProfileDeleteButton';
 import { ProfileLogOutButton } from './ProfileLogOutButton';
 
 export const ProfileForm = () => {
@@ -39,17 +40,11 @@ export const ProfileForm = () => {
   const arePasswordsEqual = (confirmPasswordValue == '') || (passwordValue == confirmPasswordValue);
 
   const [isModifyLoading, setIsModifyLoading] = useState<boolean>(false);
-  const [isDeleteLoading, setIsDeleteLoading] = useState<boolean>(false);
 
   // Snackbars
   const [showSnackbarModification, setShowSnackbarModification] = useState<boolean>(false);
-  const [showSnackbarDeletion, setShowSnackbarDeletion] = useState<boolean>(false);
-
   const [isModificationMessageSuccess, setIsModificationMessageSuccess] = useState(false);
-  const [isDeletionMessageSuccess, setIsDeletionMessageSuccess] = useState<boolean>(false);
-
   const modificationAlertSnackBarSeverity = isModificationMessageSuccess ? 'success' : 'error';
-  const deletionAlertSnackBarSeverity = isDeletionMessageSuccess ? 'success' : 'error';
 
   const onSubmitButtonClicked = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -57,7 +52,7 @@ export const ProfileForm = () => {
     if (usernameValid && emailValid && passwordValid && arePasswordsEqual) {
       setIsModifyLoading(true);
       try {
-        await updateUserInformation(emailValue, usernameValue);
+        await updateUserInformation(usernameValue, emailValue);
         setIsModificationMessageSuccess(true);
       } catch (error) {
         console.error(error);
@@ -141,8 +136,7 @@ export const ProfileForm = () => {
               />
             </Grid>
 
-
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <TextField
                 required
                 fullWidth
@@ -202,7 +196,7 @@ export const ProfileForm = () => {
                   ),
                 }}
               />
-            </Grid>
+            </Grid> */}
 
             <Grid item xs={6}>
               <LoadingButton
@@ -223,16 +217,7 @@ export const ProfileForm = () => {
             }}>
 
               <ProfileLogOutButton />
-
-              <LoadingButton
-                variant="contained"
-                type="submit"
-                size="small"
-                color="error"
-                loading={isDeleteLoading}
-              >
-                {t("deleteAccount")}
-              </LoadingButton>
+              <ProfileDeleteButton />
             </Grid>
           </Grid>
         </Box>

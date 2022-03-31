@@ -51,8 +51,7 @@ export const createUser = async (req: Request, res: Response) => {
 export const updateMe = (req: RequestWithUserId, res: Response) => {
   const id = req.userId;
   const { username, email } = req.body;
-
-  console.log(req.body)
+  console.log(username, email);
 
   if (!isUsernameValid(username)) {
     return res.status(400).send('Invalid UserName');
@@ -63,13 +62,11 @@ export const updateMe = (req: RequestWithUserId, res: Response) => {
   }
 
   const promiseUsername = isUsernameExisting(username);
-  const promiseEmail = isUsernameExisting(username);
+  const promiseEmail = isEmailExisting(email);
 
-  Promise.all([promiseUsername, promiseEmail]).then(
-    ([usernameExist, emailExist]) => {
+  Promise.all([promiseUsername, promiseEmail])
+    .then(([usernameExist, emailExist]) => {
       const userProperties: { username?: string; email?: string } = {};
-
-      console.log(userProperties);
 
       if (!usernameExist) {
         userProperties.username = username;
@@ -83,11 +80,12 @@ export const updateMe = (req: RequestWithUserId, res: Response) => {
         if (err) {
           res.status(500).send(err);
         } else {
-          res.status(200).send('User successfully updated');
+          res.status(200).send(userProperties);
         }
       });
-    }
-  );
+    }).catch((err) => {
+      res.status(500).send(err);
+    });
 };
 
 export const deleteMe = (req: RequestWithUserId, res: Response) => {
@@ -109,6 +107,7 @@ export const getMyInfo = (req: RequestWithUserId, res: Response) => {
     if (err) {
       res.status(500).send(err);
     } else {
+      console.log(user);
       res.status(200).send(user);
     }
   });
