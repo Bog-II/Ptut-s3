@@ -83,7 +83,8 @@ export const updateMe = (req: RequestWithUserId, res: Response) => {
           res.status(200).send(userProperties);
         }
       });
-    }).catch((err) => {
+    })
+    .catch((err) => {
       res.status(500).send(err);
     });
 };
@@ -93,10 +94,10 @@ export const deleteMe = (req: RequestWithUserId, res: Response) => {
   console.log(id);
   deleteUserById(id, (err) => {
     if (err) {
-      res.clearCookie('access_token');
       res.status(500).send(err);
     } else {
-      res.status(200).send('User successfully deleted');
+      res.clearCookie('access_token');
+      res.status(200).send({ success: true });
     }
   });
 };
@@ -107,7 +108,6 @@ export const getMyInfo = (req: RequestWithUserId, res: Response) => {
     if (err) {
       res.status(500).send(err);
     } else {
-      console.log(user);
       res.status(200).send(user);
     }
   });

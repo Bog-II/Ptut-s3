@@ -15,7 +15,7 @@ export const ProfileDeleteButton = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
   const [isMessageSuccess, setIsMessageSuccess] = useState<boolean>(false);
-  const deconnexionAlertSnackBarSeverity = isMessageSuccess ? 'success' : 'error';
+  const severity = isMessageSuccess ? 'success' : 'error';
 
   const handleLogOutClick = async () => {
     try {
@@ -57,10 +57,10 @@ export const ProfileDeleteButton = () => {
           vertical: "top",
           horizontal: "center"
         }}>
-        <Alert severity={deconnexionAlertSnackBarSeverity}>
+        <Alert severity={severity}>
           {isMessageSuccess
             ? t('successfulSuppression')
-            : t('successfulSuppression')}
+            : t('unsuccessfulSuppression')}
         </Alert>
       </Snackbar>
     </>
